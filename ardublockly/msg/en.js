@@ -94,6 +94,7 @@ Ardublockly.LOCALISED_TEXT = {
   catLogic: "Logic",
   catLoops: "Loops",
   catBluepill: "Bluepill",
+  catGrove: "Grove",
   catMath: "Math",
   catText: "Text",
   catVariables: "Variables",
