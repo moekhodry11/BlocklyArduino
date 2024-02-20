@@ -172,16 +172,6 @@ Ardublockly.TOOLBOX_XML =
 '    <block type="time_micros"></block>' +
 '    <block type="infinite_loop"></block>' +
 '  </category>' +
-/*'  <sep></sep>' +
-'  <sep></sep>' +
-'  <category id="catBluepill" name="Bluepill">' +
-'    <block type="io_digitalwrite"></block>' +
-'      <value name="STATE">' +
-'        <block type="io_highlow"></block>' +
-'      </value>' +
-'    <block type="io_highlow"></block>' +
-'  </category>' +
-'  <sep></sep>' +*/
 '  <sep></sep>' +
 '  <category id="catGrove" name="Groove">' +
 '    <block type="grove_button"></block>' +

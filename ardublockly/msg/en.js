@@ -93,7 +93,6 @@ Ardublockly.LOCALISED_TEXT = {
   /* Toolbox Categories*/
   catLogic: "Logic",
   catLoops: "Loops",
-  catBluepill: "Bluepill",
   catGrove: "Grove",
   catMath: "Math",
   catText: "Text",
