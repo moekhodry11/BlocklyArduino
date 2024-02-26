@@ -49,7 +49,7 @@ class ServerCompilerSettings(object):
     #       into 'blockly\generators\arduino\boards.js', which should then
     #       send the selected flag to be saved as a single value
     __arduino_types = {'Uno': 'arduino:avr:uno',
-                       'intel Galileo':'arduino:i586:intelgalileo',
+                       'Intel Galileo':'arduino:i586:intelgalileo',
                        'Nano 328': 'arduino:avr:nano:cpu=atmega328',
                        'Nano 168': 'arduino:avr:nano:cpu=atmega168',
                        'Leonardo': 'arduino:avr:leonardo',

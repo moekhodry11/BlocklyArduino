@@ -150,7 +150,7 @@ Blockly.Arduino.Boards.profiles.uno = {
   interrupt: [['interrupt0', '2'], ['interrupt1', '3']]
 };
 
-/** Arduino Uno board profile. */
+/** Intel Galileo board profile. */
 Blockly.Arduino.Boards.profiles.intel_galileo = {
   name: 'intel Galileo',
   description: 'intel Galileo standard compatible board',
@@ -182,46 +182,6 @@ Blockly.Arduino.Boards.profiles.intel_galileo = {
   builtinLed: [['BUILTIN_1', '13']],
   interrupt: [['interrupt0', '2'], ['interrupt1', '3']]
 };
-
-/** Arduino BluePill board profile (stm32) */
-Blockly.Arduino.Boards.profiles.stm32 = {
-  name: 'stm32',
-  description: 'stm32 standard compatible board',
-  compilerFlag: 'stm32duino:STM32F1:genericSTM32F103C',
-  analogPins: Blockly.Arduino.Boards.generateAnalogIostm32(),
-  digitalPins: Blockly.Arduino.Boards.generateDigitalIostm32(),
-  pwmPins: Blockly.Arduino.Boards.generateDigitalIo(0, 32), 
-  serial: [['serial', 'Serial']],
-  serialPins: { Serial: [['RX', 'PA10'], ['TX', 'PA9']] },
-  serialSpeed: [['9600', '9600'], ['19200', '19200'], ['38400', '38400'],
-                ['57600', '57600'], ['115200', '115200']],
-  spi: [['SPI', 'SPI']],
-  spiPins: { SPI: [['MOSI', 'PA7'], ['MISO', 'PA6'], ['SCK', 'PA5']] },
-  spiClockDivide: [['2 (36MHz)', 'SPI_CLOCK_DIV2'],
-                   ['4 (18MHz)', 'SPI_CLOCK_DIV4'],
-                   ['8 (9MHz)', 'SPI_CLOCK_DIV8'],
-                   ['16 (4.5MHz)', 'SPI_CLOCK_DIV16'],
-                   ['32 (2.25MHz)', 'SPI_CLOCK_DIV32'],
-                   ['64 (1.125MHz)', 'SPI_CLOCK_DIV64'],
-                   ['128 (562.5KHz)', 'SPI_CLOCK_DIV128']],
-  i2c: [['I2C', 'Wire']],
-  i2cPins: { Wire: [['SDA', 'PB7'], ['SCL', 'PB6']] },
-  i2cSpeed: [['100kHz', '100000L'], ['400kHz', '400000L']],
-  builtinLed: [['LED_BUILTIN', 'PC13']],
-  interrupt: [['interrupt0', 'PA0'], ['interrupt1', 'PA1'], ['interrupt2', 'PA2'],
-              ['interrupt3', 'PA3'], ['interrupt4', 'PA4'], ['interrupt5', 'PA5'],
-              ['interrupt6', 'PA6'], ['interrupt7', 'PA7'], ['interrupt8', 'PB0'],
-              ['interrupt9', 'PB1'], ['interrupt10', 'PB2'], ['interrupt11', 'PB10'],
-              ['interrupt12', 'PB11'], ['interrupt13', 'PB12'], ['interrupt14', 'PB13'],
-              ['interrupt15', 'PB14'], ['interrupt16', 'PB15'], ['interrupt17', 'PB3'],
-              ['interrupt18', 'PB4'], ['interrupt19', 'PB5'], ['interrupt20', 'PB8'],
-              ['interrupt21', 'PB9'], ['interrupt22', 'PC10'], ['interrupt23', 'PC11'],
-              ['interrupt24', 'PC12'], ['interrupt25', 'PC13'], ['interrupt26', 'PC14'],
-              ['interrupt27', 'PC15'], ['interrupt28', 'PC6'], ['interrupt29', 'PC7'],
-              ['interrupt30', 'PC8'], ['interrupt31', 'PC9']]
-};
-
-
 
 
 

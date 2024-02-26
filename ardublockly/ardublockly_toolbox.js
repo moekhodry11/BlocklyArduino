@@ -121,6 +121,35 @@ Ardublockly.TOOLBOX_XML =
 '  <sep></sep>' +
 '  <category id="catFunctions" name="Functions" custom="PROCEDURE"></category>' +
 '  <sep></sep>' +
+
+
+// Khodary new catageries
+//LCD
+'  <category id="catLCD" name="LCD">' +
+'    <block type="lcd_begin"></block>' +
+'    <block type="lcd_print">' +
+'      <value name="TEXT">' +
+'        <block type="text"></block>' +
+'      </value>' +
+'    </block>' +
+'    <block type="lcd_set_cursor">' +
+'      <value name="COL">' +
+'        <block type="math_number">' +
+'          <field name="NUM">0</field>' +
+'        </block>' +
+'      </value>' +
+'      <value name="ROW">' +
+'        <block type="math_number">' +
+'          <field name="NUM">0</field>' +
+'        </block>' +
+'      </value>' +
+'    </block>' +
+'    <block type="lcd_clear"></block>' +
+'  </category>' +
+'  <sep></sep>' +
+
+
+
 '  <category id="catInputOutput" name="Input/Output">' +
 '    <block type="io_digitalwrite">' +
 '      <value name="STATE">' +
@@ -153,6 +182,9 @@ Ardublockly.TOOLBOX_XML =
 '    </block>' +
 '  </category>' +
 '  <sep></sep>' +
+
+
+
 '  <category id="catTime" name="Time">' +
 '    <block type="time_delay">' +
 '      <value name="DELAY_TIME_MILI">' +
