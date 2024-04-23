@@ -22,7 +22,11 @@ goog.require('Blockly.Arduino');
 
 Blockly.Arduino['lcd_begin'] = function(block) {
 
+<<<<<<< HEAD
     Blockly.Arduino.addInclude('servo', '#include <LiquidCrystal.h>');
+=======
+    Blockly.Arduino.addInclude('lcd', '#include <LiquidCrystal.h>');
+>>>>>>> 32cdf28 (lcd i2c ldr sd card ultrasonic)
 
   var rs = block.getFieldValue('RS');
   var en = block.getFieldValue('EN');
