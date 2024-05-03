@@ -22,7 +22,7 @@ goog.require('Blockly.Arduino');
 
 Blockly.Arduino['lcd_begin'] = function(block) {
 
-    Blockly.Arduino.addInclude('servo', '#include <LiquidCrystal.h>');
+    Blockly.Arduino.addInclude('lcd', '#include <LiquidCrystal.h>');
 
   var rs = block.getFieldValue('RS');
   var en = block.getFieldValue('EN');
