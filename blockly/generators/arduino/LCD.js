@@ -24,6 +24,7 @@ Blockly.Arduino['lcd_begin'] = function(block) {
 
     Blockly.Arduino.addInclude('lcd', '#include <LiquidCrystal.h>');
 
+  var id = block.getFieldValue('ID');
   var rs = block.getFieldValue('RS');
   var en = block.getFieldValue('EN');
   var d4 = block.getFieldValue('D4');
@@ -31,29 +32,30 @@ Blockly.Arduino['lcd_begin'] = function(block) {
   var d6 = block.getFieldValue('D6');
   var d7 = block.getFieldValue('D7');
 
-  Blockly.Arduino.addDeclaration('lcd', 'LiquidCrystal lcd('+rs+','+en+','+d4+','+d5+','+d6+','+d7+');');
-
-  Blockly.Arduino.addSetup('lcd', 'lcd.begin(16, 2);', true);
-  
-    var code = '';
+  Blockly.Arduino.addDeclaration('lcd_' + id, 'LiquidCrystal lcd_'+id+'('+rs+','+en+','+d4+','+d5+','+d6+','+d7+');');
+  var code = 'lcd_'+id+'.begin(16,2);\n';
   return code;
 }
 
+
 Blockly.Arduino['lcd_print'] = function(block) {
+  var id = block.getFieldValue('ID');
   var text = Blockly.Arduino.valueToCode(block, 'TEXT', Blockly.Arduino.ORDER_ATOMIC) || '0';
-  var code = 'lcd.print('+text+');\n';
+  var code = 'lcd_'+id+'.print('+text+');\n';
   return code;
 }
 
 Blockly.Arduino['lcd_set_cursor'] = function(block) {
+  var id = block.getFieldValue('ID');
   var col = Blockly.Arduino.valueToCode(block, 'COL', Blockly.Arduino.ORDER_ATOMIC) || '0';
   var row = Blockly.Arduino.valueToCode(block, 'ROW', Blockly.Arduino.ORDER_ATOMIC) || '0';
-  var code = 'lcd.setCursor('+col+','+row+');\n';
+  var code = 'lcd_'+id+'.setCursor('+col+','+row+');\n';
   return code;
 }
 
 
 Blockly.Arduino['lcd_clear'] = function(block) {
-  var code = 'lcd.clear();\n';
+  var id = block.getFieldValue('ID');
+  var code = 'lcd_'+id+'.clear();\n';
   return code;
 }

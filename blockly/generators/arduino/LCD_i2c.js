@@ -15,13 +15,13 @@ Blockly.Arduino.LCD_i2c_setup = function () {
 }
 
 
-Blockly.Arduino['lcd_print'] = function(block) {
+Blockly.Arduino['LCD_i2c_print'] = function(block) {
   var text = Blockly.Arduino.valueToCode(block, 'TEXT', Blockly.Arduino.ORDER_ATOMIC) || '0';
   var code = 'lcd.print('+text+');\n';
   return code;
 }
 
-Blockly.Arduino['lcd_set_cursor'] = function(block) {
+Blockly.Arduino['LCD_i2c_set_cursor'] = function(block) {
   var col = Blockly.Arduino.valueToCode(block, 'COL', Blockly.Arduino.ORDER_ATOMIC) || '0';
   var row = Blockly.Arduino.valueToCode(block, 'ROW', Blockly.Arduino.ORDER_ATOMIC) || '0';
   var code = 'lcd.setCursor('+col+','+row+');\n';
@@ -29,7 +29,7 @@ Blockly.Arduino['lcd_set_cursor'] = function(block) {
 }
 
 
-Blockly.Arduino['lcd_clear'] = function(block) {
+Blockly.Arduino['LCD_i2c_clear'] = function(block) {
   var code = 'lcd.clear();\n';
   return code;
 }

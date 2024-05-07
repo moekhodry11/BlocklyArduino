@@ -5,7 +5,7 @@ goog.provide("Blockly.Blocks.oled");
 goog.require("Blockly.Blocks");
 goog.require("Blockly.Types");
 
-Blockly.Blocks.oled.HUE = 250;
+Blockly.Blocks.oled.HUE = 100;
 
 Blockly.Blocks["oled_setup"] = {
   init: function () {
@@ -53,7 +53,6 @@ Blockly.Blocks["oled_clear"] = {
     this.setHelpUrl("http://arduino.cc/en/Reference/Keypad");
   },
 };
-
 
 Blockly.Blocks["oled_display"] = {
   init: function () {
@@ -170,4 +169,3 @@ Blockly.Blocks["oled_draw_circle"] = {
     this.setHelpUrl("http://arduino.cc/en/Reference/Keypad");
   },
 };
-
