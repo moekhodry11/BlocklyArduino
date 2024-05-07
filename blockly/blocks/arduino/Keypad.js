@@ -10,7 +10,11 @@ Blockly.Blocks.keypad.HUE = 0;
 Blockly.Blocks["keypad_setup"] = {
   init: function () {
     this.appendDummyInput()
-      .appendField("Setup Keypad To")
+      .appendField("Setup Keypad#")
+      .appendField(
+        new Blockly.FieldDropdown([["1"], ["2"], ["3"], ["4"]]),
+        "ID"
+      )
       .appendField(
         new Blockly.FieldDropdown(
           [["4x3"], ["4x4"]],
@@ -88,19 +92,13 @@ Blockly.Blocks["keypad_setup"] = {
 Blockly.Blocks["keypad_get_key"] = {
   init: function () {
     this.appendDummyInput()
-      .appendField("Setup Keypad To")
+      .appendField("Get Key from Keypad#")
       .appendField(
-        new Blockly.FieldDropdown([["4x3"], ["4x4"]]),
-        "KEYPAD_TYPE"
+        new Blockly.FieldDropdown([["1"], ["2"], ["3"], ["4"]]),
+        "ID"
       );
-
-    this.setOutput(true, Blockly.Types.TEXT.output);
+    this.setOutput(true, "String");
     this.setColour(Blockly.Blocks.keypad.HUE);
-    this.setTooltip("Get the key pressed on the Keypad");
-    this.setHelpUrl("http://arduino.cc/en/Reference/KeypadGetKey");
-  },
-
-  getBlockType: function () {
-    return Blockly.Types.CHARACTER;
+    this.setTooltip(Blockly.Msg.ARD_KEYPAD_GET_KEY_TIP);
   },
 };

@@ -120,8 +120,6 @@ Ardublockly.TOOLBOX_XML =
   "        </block>" +
   "      </value>" +
   "    </block>" +
-
-  
   '    <block type="variables_get"></block>' +
   '    <block type="variables_set"></block>' +
   '    <block type="variables_set">' +
@@ -136,6 +134,9 @@ Ardublockly.TOOLBOX_XML =
   '  <category id="catLCD" name="LCD">' +
   '    <block type="lcd_begin">' +
   '      <field name="ID">1</field>' +
+  '      <field name="LCDTYPE">standard</field>' +
+  '      <field name="LCDSIZE">16x2</field>' +
+  '      <field name="I2C_ADDRESS">0x27</field>' +
   '      <field name="RS">0</field>' +
   '      <field name="EN">1</field>' +
   '      <field name="D4">2</field>' +
@@ -171,6 +172,8 @@ Ardublockly.TOOLBOX_XML =
 
   '  <category id="catKeypad" name="Keypad">' +
   '    <block type="keypad_setup">' +
+  '      <field name="ID">1</field>' +
+
   '      <field name="KEYPAD_TYPE">4x3</field>' +
   '      <field name="ROWS1">0</field>' +
   '      <field name="ROWS2">1</field>' +
@@ -182,7 +185,9 @@ Ardublockly.TOOLBOX_XML =
   '      <field name="COLS4">7</field>' +
   "    </block>" +
   '    <block type="keypad_get_key">' +
-  '      <field name="KEYPAD_TYPE">4x3</field>' +
+  '      <field name="ID">1</field>' +
+
+
   "    </block>" +
   "  </category>" +
   "  <sep></sep>" +
@@ -221,63 +226,39 @@ Ardublockly.TOOLBOX_XML =
 
   '  <category id="catTMP36" name="TMP36">' +
   '    <block type="tmp36_read">' +
-  '      <field name="PIN">0</field>' +
+  '      <field name="PIN">A0</field>' +
   "    </block>" +
-  "  </category>" +
-  "  <sep></sep>" +
-  //LCD I2C
-
-  '  <category id="catLCDI2C" name="LCD I2C">' +
-  '    <block type="LCD_i2c_setup">' +
-  "    </block>" +
-  '    <block type="LCD_i2c_print">' +
-  '      <value name="TEXT">' +
-  '        <block type="text"></block>' +
-  "      </value>" +
-  "    </block>" +
-  '    <block type="LCD_i2c_set_cursor">' +
-  '      <value name="COL">' +
-  '        <block type="math_number">' +
-  '          <field name="NUM">0</field>' +
-  "        </block>" +
-  "      </value>" +
-  '      <value name="ROW">' +
-  '        <block type="math_number">' +
-  '          <field name="NUM">0</field>' +
-  "        </block>" +
-  "      </value>" +
-  "    </block>" +
-  '    <block type="LCD_i2c_clear"></block>' +
   "  </category>" +
   "  <sep></sep>" +
   //ldr
 
   '  <category id="catLDR" name="LDR">' +
   '    <block type="ldr_setup">' +
+
+  '      <field name="ID">1</field>' +
   '      <field name="PIN">0</field>' +
   "    </block>" +
-  '    <block type="ldr_read"></block>' +
+  '    <block type="ldr_read">' +
+  '      <field name="ID">1</field>' +
+  "    </block>" +
   "  </category>" +
   "  <sep></sep>" +
+
   //oled
+
   '  <category id="catOLED" name="OLED">' +
-  '    <block type="oled_setup">' +
-  '      <field name="SDA">1</field>' +
-  '      <field name="SCL">2</field>' +
+  '    <block type="oled_i2c_begin">' +
+  '      <field name="ID">1</field>' +
+  '      <field name="WIDTH">128</field>' +
+  '      <field name="HEIGHT">64</field>' +
   '      <field name="ADDRESS">0x3C</field>' +
   "    </block>" +
-  '    <block type="oled_print">' +
+  '    <block type="oled_print_text">' +
   '      <value name="TEXT">' +
   '        <block type="text"></block>' +
   "      </value>" +
-  "    </block>" +
-  '    <block type="oled_clear"></block>' +
-  '    <block type="oled_display"></block>' +
-  '    <block type="oled_set_text_size">' +
-  '      <field name="SIZE">1</field>' +
-  "    </block>" +
-  '    <block type="oled_set_text_color">' +
-  '      <field name="COLOR">WHITE</field>' +
+  '      <field name="ID">1</field>' +
+  //add cursor block
   "    </block>" +
   '    <block type="oled_set_cursor">' +
   '      <value name="COL">' +
@@ -290,6 +271,19 @@ Ardublockly.TOOLBOX_XML =
   '          <field name="NUM">0</field>' +
   "        </block>" +
   "      </value>" +
+  '      <field name="ID">1</field>' +
+  //add clear block
+  "    </block>" +
+  '    <block type="oled_clear">' +
+  '      <field name="ID">1</field>' +
+  "    </block>" +
+  '    <block type="oled_set_text_size">' +
+  '      <field name="ID">1</field>' +
+  '      <field name="SIZE">1</field>' +
+  '    </block>' +
+  '    <block type="oled_set_text_color">' +
+  '      <field name="ID">1</field>' +
+  '      <field name="COLOR">White</field>' +
   "    </block>" +
   '    <block type="oled_draw_pixel">' +
   '      <value name="X">' +
@@ -302,10 +296,12 @@ Ardublockly.TOOLBOX_XML =
   '          <field name="NUM">0</field>' +
   "        </block>" +
   "      </value>" +
+  '      <field name="ID">1</field>' +
   "    </block>" +
+
   "  </category>" +
   "  <sep></sep>" +
-  //END OF KHODARY
+
   '  <category id="catInputOutput" name="Input/Output">' +
   '    <block type="io_digitalwrite">' +
   '      <value name="STATE">' +
