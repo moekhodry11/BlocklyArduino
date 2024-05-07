@@ -18,6 +18,23 @@ goog.require("Blockly.Arduino");
  * @param {Blockly.Block} block Block to generate the code from.
  * @return {array} Completed code with order of operation.
  */
+
+//declare variable block
+
+Blockly.Arduino["variables_declare"] = function (block) {
+  var dropdown_variables_type = block.getFieldValue("VARIABLES_TYPE");
+  var text_variables_name = block.getFieldValue("VARIABLES_NAME");
+  var value_variables_value = Blockly.Arduino.valueToCode(
+    block,
+    "VARIABLES_VALUE",
+    Blockly.Arduino.ORDER_ATOMIC
+  );
+
+  var code = `${dropdown_variables_type} ${text_variables_name} = ${value_variables_value};\n`;
+  return code;
+}
+
+
 Blockly.Arduino["variables_get"] = function (block) {
   var code = Blockly.Arduino.variableDB_.getName(
     block.getFieldValue("VAR"),
@@ -66,3 +83,6 @@ Blockly.Arduino["variables_set_type"] = function (block) {
   var code = "(" + varType + ")(" + argument0 + ")";
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
+
+
+

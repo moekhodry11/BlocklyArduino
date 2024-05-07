@@ -24,7 +24,7 @@ Blockly.Blocks["LCD_i2c_setup"] = {
 
 
 
-Blockly.Blocks['lcd_print'] = {
+Blockly.Blocks['LCD_i2c_print'] = {
   /**
    * Block for creating a lcd.print() function.
    * @this Blockly.Block
@@ -41,7 +41,7 @@ Blockly.Blocks['lcd_print'] = {
   }
 };
 
-Blockly.Blocks['lcd_set_cursor'] = {
+Blockly.Blocks['LCD_i2c_set_cursor'] = {
   /**
    * Block for creating a lcd.setCursor() function.
    * @this Blockly.Block
@@ -60,7 +60,7 @@ Blockly.Blocks['lcd_set_cursor'] = {
   }
 };
 
-Blockly.Blocks['lcd_clear'] = {
+Blockly.Blocks['LCD_i2c_clear'] = {
   /**
    * Block for creating a lcd.clear() function.
    * @this Blockly.Block

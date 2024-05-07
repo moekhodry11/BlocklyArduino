@@ -18,9 +18,7 @@ goog.require('Blockly.Blocks');
 goog.require('Blockly.Types');
 
 
-Blockly.Blocks.sdcard.HUE = 250;
-
-//set sdcard on pin 10 and add spi and sd library make object of File and check if sd card is present or not
+Blockly.Blocks.sdcard.HUE = 70;
 
 Blockly.Blocks['sdcard_setup'] = {
     init: function() {

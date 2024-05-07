@@ -3,7 +3,7 @@ goog.provide("Blockly.Blocks.ultrasonic");
 goog.require("Blockly.Blocks");
 goog.require("Blockly.Types");
 
-Blockly.Blocks.ultrasonic.HUE = 230;
+Blockly.Blocks.ultrasonic.HUE = 150;
 
 
 Blockly.Blocks["ultrasonic_setup"] = {
