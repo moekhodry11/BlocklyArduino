@@ -7,165 +7,177 @@ goog.require("Blockly.Types");
 
 Blockly.Blocks.oled.HUE = 100;
 
-Blockly.Blocks["oled_setup"] = {
+Blockly.Blocks["oled_i2c_begin"] = {
   init: function () {
+    this.setHelpUrl("http://arduino.cc/en/Reference/LiquidCrystalBegin");
+    this.setColour(Blockly.Blocks.oled.HUE);
     this.appendDummyInput()
-      .appendField("Setup OLED")
-      .appendField("SDA")
+      .appendField(Blockly.Msg.ARD_OLED_I2C_BEGIN)
+      .appendField("Set I2C OLED On")
+      .appendField("OLED #")
       .appendField(
-        new Blockly.FieldDropdown(Blockly.Arduino.Boards.selected.digitalPins),
-        "SDA"
+        new Blockly.FieldDropdown([["1"], ["2"], ["3"], ["4"]]),
+        "ID"
       )
-      .appendField("SCL")
-      .appendField(
-        new Blockly.FieldDropdown(Blockly.Arduino.Boards.selected.digitalPins),
-        "SCL"
-      )
+      .appendField("Width")
+      .appendField(new Blockly.FieldDropdown([["128"], ["256"]]), "WIDTH")
+      .appendField("Height")
+      .appendField(new Blockly.FieldDropdown([["64"], ["128"]]), "HEIGHT")
       .appendField("Address")
-      .appendField(new Blockly.FieldTextInput("0x3C"), "ADDRESS");
-    this.setInputsInline(true);
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, null);
-    this.setColour(Blockly.Blocks.oled.HUE);
-    this.setTooltip("Setup the OLED");
-    this.setHelpUrl("http://arduino.cc/en/Reference/Keypad");
-  },
-};
-
-Blockly.Blocks["oled_print"] = {
-  init: function () {
-    this.appendValueInput("TEXT").appendField("Print On OLED");
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, null);
-    this.setColour(Blockly.Blocks.oled.HUE);
-    this.setTooltip("Print on the OLED");
-    this.setHelpUrl("http://arduino.cc/en/Reference/Keypad");
-  },
-};
-
-Blockly.Blocks["oled_clear"] = {
-  init: function () {
-    this.appendDummyInput().appendField("Clear OLED");
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, null);
-    this.setColour(Blockly.Blocks.oled.HUE);
-    this.setTooltip("Clear the OLED");
-    this.setHelpUrl("http://arduino.cc/en/Reference/Keypad");
-  },
-};
-
-Blockly.Blocks["oled_display"] = {
-  init: function () {
-    this.appendDummyInput().appendField("Display OLED");
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, null);
-    this.setColour(Blockly.Blocks.oled.HUE);
-    this.setTooltip("Display the OLED");
-    this.setHelpUrl("http://arduino.cc/en/Reference/Keypad");
-  },
-};
-
-Blockly.Blocks["oled_set_text_size"] = {
-  init: function () {
-    this.appendDummyInput()
-      .appendField("Set Text Size")
       .appendField(
-        new Blockly.FieldDropdown([
-          ["1", "1"],
-          ["2", "2"],
-          ["3", "3"],
-          ["4", "4"],
-        ]),
+        new Blockly.FieldDropdown([["0x3C"], ["0x3D"], ["0x3E"], ["0x3F"]]),
+        "ADDRESS"
+      );
+
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip(Blockly.Msg.ARD_OLED_I2C_BEGIN_TIP);
+  },
+};
+
+Blockly.Blocks["oled_print_text"] = {
+  init: function () {
+    this.setHelpUrl("http://arduino.cc/en/Reference/LiquidCrystalPrint");
+    this.setColour(Blockly.Blocks.oled.HUE);
+    this.appendValueInput("TEXT")
+      .appendField("Print to OLED")
+      .appendField(Blockly.Msg.ARD_OLED_PRINT_TEXT)
+      .setCheck(Blockly.Types.TEXT.checkList);
+    this.appendDummyInput()
+      .appendField("OLED #")
+      .appendField(
+        new Blockly.FieldDropdown([["1"], ["2"], ["3"], ["4"]]),
+        "ID"
+      );
+
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip(Blockly.Msg.ARD_OLED_PRINT_TEXT_TIP);
+  },
+};
+
+
+// Block for setting the cursor position on the OLED display
+Blockly.Blocks['oled_set_cursor'] = {
+  init: function() {
+    this.setHelpUrl('http://arduino.cc/en/Reference/LiquidCrystalSetCursor');
+    this.setColour(Blockly.Blocks.oled.HUE);
+    this.appendDummyInput()
+      .appendField("Set cursor position")
+      .appendField("column")
+      .appendField(
+        new Blockly.FieldNumber(0, 0),
+        "COL"
+      )
+      .appendField("row")
+      .appendField(
+        new Blockly.FieldNumber(0, 0),
+        "ROW"
+      )
+      .appendField("on OLED #")
+      .appendField(
+        new Blockly.FieldDropdown([["1"], ["2"], ["3"], ["4"]]),
+        "ID"
+      );
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip(Blockly.Msg.ARD_OLED_SET_CURSOR_TIP);
+  }
+};
+
+
+// Block for clearing the OLED display
+Blockly.Blocks['oled_clear'] = {
+  init: function() {
+    this.setHelpUrl('http://arduino.cc/en/Reference/LiquidCrystalClear');
+    this.setColour(Blockly.Blocks.oled.HUE);
+    this.appendDummyInput()
+      .appendField("Clear OLED #")
+      .appendField(
+        new Blockly.FieldDropdown([["1"], ["2"], ["3"], ["4"]]),
+        "ID"
+      );
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip(Blockly.Msg.ARD_OLED_CLEAR_TIP);
+  }
+};
+
+
+// Block for setting text size on the OLED display
+Blockly.Blocks['oled_set_text_size'] = {
+  init: function() {
+    this.setHelpUrl('http://arduino.cc/en/Reference/LiquidCrystalSetTextSize');
+    this.setColour(Blockly.Blocks.oled.HUE);
+    this.appendDummyInput()
+      .appendField("Set text size")
+      .appendField(
+        new Blockly.FieldDropdown([["1"], ["2"], ["3"], ["4"]]),
         "SIZE"
-      );
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, null);
-    this.setColour(Blockly.Blocks.oled.HUE);
-    this.setTooltip("Set the text size");
-    this.setHelpUrl("http://arduino.cc/en/Reference/Keypad");
-  },
-};
-
-Blockly.Blocks["oled_set_text_color"] = {
-  init: function () {
-    this.appendDummyInput()
-      .appendField("Set Text Color")
+      )
+      .appendField("on OLED #")
       .appendField(
-        new Blockly.FieldDropdown([
-          ["WHITE", "WHITE"],
-          ["BLACK", "BLACK"],
-        ]),
-        "COLOR"
+        new Blockly.FieldDropdown([["1"], ["2"], ["3"], ["4"]]),
+        "ID"
       );
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(Blockly.Blocks.oled.HUE);
-    this.setTooltip("Set the text color");
-    this.setHelpUrl("http://arduino.cc/en/Reference/Keypad");
-  },
+    this.setTooltip(Blockly.Msg.ARD_OLED_SET_TEXT_SIZE_TIP);
+  }
 };
 
-Blockly.Blocks["oled_set_cursor"] = {
-  init: function () {
-    this.appendValueInput("COL").appendField("Set Cursor");
-    this.appendValueInput("ROW").appendField("Row");
+// Block for setting text color on the OLED display
+Blockly.Blocks['oled_set_text_color'] = {
+  init: function() {
+    this.setHelpUrl('http://arduino.cc/en/Reference/LiquidCrystalSetTextColor');
+    this.setColour(Blockly.Blocks.oled.HUE);
+    this.appendDummyInput()
+      .appendField("Set text color")
+      .appendField(
+        new Blockly.FieldDropdown([["White"], ["Black"], ["Invert"]]),
+        "COLOR"
+      )
+      .appendField("on OLED #")
+      .appendField(
+        new Blockly.FieldDropdown([["1"], ["2"], ["3"], ["4"]]),
+        "ID"
+      );
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(Blockly.Blocks.oled.HUE);
-    this.setTooltip("Set the cursor");
-    this.setHelpUrl("http://arduino.cc/en/Reference/Keypad");
-  },
+    this.setTooltip(Blockly.Msg.ARD_OLED_SET_TEXT_COLOR_TIP);
+  }
 };
 
-Blockly.Blocks["oled_draw_pixel"] = {
-  init: function () {
-    this.appendValueInput("X").appendField("Draw Pixel");
-    this.appendValueInput("Y").appendField("Y");
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, null);
-    this.setColour(Blockly.Blocks.oled.HUE);
-    this.setTooltip("Draw a pixel");
-    this.setHelpUrl("http://arduino.cc/en/Reference/Keypad");
-  },
-};
 
-Blockly.Blocks["oled_draw_line"] = {
-  init: function () {
-    this.appendValueInput("X1").appendField("Draw Line");
-    this.appendValueInput("Y1").appendField("Y1");
-    this.appendValueInput("X2").appendField("X2");
-    this.appendValueInput("Y2").appendField("Y2");
+// Block for drawing a pixel on the OLED display
+Blockly.Blocks['oled_draw_pixel'] = {
+  init: function() {
+    this.setHelpUrl('http://arduino.cc/en/Reference/LiquidCrystalDrawPixel');
+    this.setColour(Blockly.Blocks.oled.HUE);
+    this.appendDummyInput()
+      .appendField("Draw pixel at")
+      .appendField("X:")
+      .appendField(
+        new Blockly.FieldNumber(0, 0, Infinity, 1),
+        "X"
+      )
+      .appendField("Y:")
+      .appendField(
+        new Blockly.FieldNumber(0, 0, Infinity, 1),
+        "Y"
+      )
+      .appendField("Color:")
+      .appendField(
+        new Blockly.FieldDropdown([["White"], ["Black"], ["Invert"]]),
+        "COLOR"
+      )
+      .appendField("on OLED #")
+      .appendField(
+        new Blockly.FieldDropdown([["1"], ["2"], ["3"], ["4"]]),
+        "ID"
+      );
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(Blockly.Blocks.oled.HUE);
-    this.setTooltip("Draw a line");
-    this.setHelpUrl("http://arduino.cc/en/Reference/Keypad");
-  },
-};
-
-Blockly.Blocks["oled_draw_rect"] = {
-  init: function () {
-    this.appendValueInput("X").appendField("Draw Rectangle");
-    this.appendValueInput("Y").appendField("Y");
-    this.appendValueInput("WIDTH").appendField("Width");
-    this.appendValueInput("HEIGHT").appendField("Height");
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, null);
-    this.setColour(Blockly.Blocks.oled.HUE);
-    this.setTooltip("Draw a rectangle");
-    this.setHelpUrl("http://arduino.cc/en/Reference/Keypad");
-  },
-};
-
-Blockly.Blocks["oled_draw_circle"] = {
-  init: function () {
-    this.appendValueInput("X").appendField("Draw Circle");
-    this.appendValueInput("Y").appendField("Y");
-    this.appendValueInput("RADIUS").appendField("Radius");
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, null);
-    this.setColour(Blockly.Blocks.oled.HUE);
-    this.setTooltip("Draw a circle");
-    this.setHelpUrl("http://arduino.cc/en/Reference/Keypad");
-  },
+    this.setTooltip(Blockly.Msg.ARD_OLED_DRAW_PIXEL_TIP);
+  }
 };

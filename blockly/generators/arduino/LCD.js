@@ -21,21 +21,34 @@ goog.require('Blockly.Arduino');
 
 
 Blockly.Arduino['lcd_begin'] = function(block) {
-
-    Blockly.Arduino.addInclude('lcd', '#include <LiquidCrystal.h>');
-
   var id = block.getFieldValue('ID');
-  var rs = block.getFieldValue('RS');
-  var en = block.getFieldValue('EN');
-  var d4 = block.getFieldValue('D4');
-  var d5 = block.getFieldValue('D5');
-  var d6 = block.getFieldValue('D6');
-  var d7 = block.getFieldValue('D7');
+  var lcdtype = block.getFieldValue('LCDTYPE');
+  var lcdsize = block.getFieldValue('LCDSIZE');
+  var rs, en, d4, d5, d6, d7;
 
-  Blockly.Arduino.addDeclaration('lcd_' + id, 'LiquidCrystal lcd_'+id+'('+rs+','+en+','+d4+','+d5+','+d6+','+d7+');');
-  var code = 'lcd_'+id+'.begin(16,2);\n';
-  return code;
-}
+  if (lcdtype === 'standard') {
+      rs = block.getFieldValue('RS');
+      en = block.getFieldValue('EN');
+      d4 = block.getFieldValue('D4');
+      d5 = block.getFieldValue('D5');
+      d6 = block.getFieldValue('D6');
+      d7 = block.getFieldValue('D7');
+      
+      Blockly.Arduino.addInclude('lcd', '#include <LiquidCrystal.h>');
+      Blockly.Arduino.addDeclaration('lcd_' + id, 'LiquidCrystal lcd_' + id + '(' + rs + ',' + en + ',' + d4 + ',' + d5 + ',' + d6 + ',' + d7 + ');');
+      Blockly.Arduino.addSetup('lcd_' + id, 'lcd_' + id + '.begin(' + lcdsize + ');', false);
+  } else if (lcdtype === 'i2c') {
+      var i2cAddress = block.getFieldValue('I2C_ADDRESS');
+      
+      Blockly.Arduino.addInclude('wire', '#include <Wire.h>');
+      Blockly.Arduino.addInclude('i2c', '#include <LiquidCrystal_I2C.h>');
+      Blockly.Arduino.addDeclaration('lcd_' + id, 'LiquidCrystal_I2C lcd_' + id + '(' + i2cAddress + ',' + lcdsize + ');');
+      Blockly.Arduino.setups_['setup_lcd_' + id] = 'lcd_' + id + '.init();\nlcd_' + id + '.backlight();';
+  }
+
+  return '';
+};
+
 
 
 Blockly.Arduino['lcd_print'] = function(block) {

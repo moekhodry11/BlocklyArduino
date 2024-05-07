@@ -9,8 +9,10 @@ goog.require("Blockly.Arduino");
         //make a dropdown menu to choose the pin
         Blockly.Arduino.ldr_setup = function () {
 
-          var dropdown_pin = this.getFieldValue('PIN');
-          Blockly.Arduino.definitions_['define_ldr'] = '#define LDR ' + dropdown_pin + '\n';
+          var id = this.getFieldValue('ID');
+
+          var pin = this.getFieldValue('PIN');
+          Blockly.Arduino.definitions_['define_ldr'+id] = '#define LDR'+id+' ' + pin + '\n';
           Blockly.Arduino.setups_['setup_ldr'] = 'pinMode(LDR, INPUT);';
           return '';
         }
@@ -22,10 +24,9 @@ goog.require("Blockly.Arduino");
   //read
 
   Blockly.Arduino.ldr_read = function () {
-      
-        var code = 'analogRead(LDR)';
-        return [code, Blockly.Arduino.ORDER_ATOMIC];
-      };
-
-
+    var id = this.getFieldValue('ID');
+    var code = 'analogRead(LDR'+id+')';
+    return [code, Blockly.Arduino.ORDER_ATOMIC];
+  }
+  
 
