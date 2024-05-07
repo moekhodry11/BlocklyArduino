@@ -123,4 +123,7 @@ Ardublockly.LOCALISED_TEXT = {
   catJoystick: "Joystick",
   catIR: "IR",
   catRTC: "RTC",
+  catUltrasonic: "Ultrasonic",
+  catTMP36: "TMP36",
+  catOLED: "OLED",
 };
