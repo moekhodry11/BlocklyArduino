@@ -104,7 +104,7 @@ Ardublockly.LOCALISED_TEXT = {
   /* Toolbox Categories*/
   catLogic: "Logic",
   catLoops: "Loops",
-  catGrove: "Grove",
+  catLDR: "LDR",
   catMath: "Math",
   catText: "Text",
   catVariables: "Variables",
@@ -123,4 +123,7 @@ Ardublockly.LOCALISED_TEXT = {
   catJoystick: "Joystick",
   catIR: "IR",
   catRTC: "RTC",
+  catUltrasonic: "Ultrasonic",
+  catTMP36: "TMP36",
+  catOLED: "OLED",
 };

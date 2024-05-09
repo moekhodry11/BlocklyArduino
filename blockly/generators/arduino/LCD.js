@@ -24,6 +24,15 @@ Blockly.Arduino['lcd_begin'] = function(block) {
   var id = block.getFieldValue('ID');
   var lcdtype = block.getFieldValue('LCDTYPE');
   var lcdsize = block.getFieldValue('LCDSIZE');
+  if (lcdsize === '16x2') {
+      lcdsize = '16, 2';
+  } else if (lcdsize === '16x4') {
+      lcdsize = '16, 4';
+  }
+  else if (lcdsize === '20x4') {
+      lcdsize = '20, 4';
+  }
+      
   var rs, en, d4, d5, d6, d7;
 
   if (lcdtype === 'standard') {
