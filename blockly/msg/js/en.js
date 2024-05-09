@@ -702,9 +702,9 @@ Blockly.Msg.ARD_LCD_SET_CURSOR_POSITION_TIP =
 //add tips for keypad
 Blockly.Msg.ARD_KEYPAD_SETUP = "setup";
 Blockly.Msg.ARD_KEYPAD_SETUP_TIP = "Initializes the keypad";
-Blockly.Msg.ARD_KEYPAD_KEY = "key";
-Blockly.Msg.ARD_KEYPAD_KEY_TIP = "Returns the key pressed on the keypad";
-Blockly.Msg.ARD_KEYPAD_KEYPAD = "keypad";
+Blockly.Msg.ARD_KEYPAD_GET_KEY = "get key";
+Blockly.Msg.ARD_KEYPAD_GET_KEY_TIP = "Returns the key pressed on the keypad";
+
 
 //add tips for sd card
 Blockly.Msg.ARD_SD_BEGIN = "begin";
@@ -747,18 +747,27 @@ Blockly.Msg.ARD_LDR_READ = "read";
 Blockly.Msg.ARD_LDR_READ_TIP = "Reads the value from the LDR sensor";
 
 //add tips for oled
-Blockly.Msg.ARD_OLED_SETUP = "setup";
-Blockly.Msg.ARD_OLED_SETUP_TIP = "Initializes the OLED display";
-Blockly.Msg.ARD_OLED_PRINT = "print";
-Blockly.Msg.ARD_OLED_PRINT_TIP = "Prints text on the OLED display";
+Blockly.Msg.ARD_OLED_I2C_BEGIN = "setup"; 
+Blockly.Msg.ARD_OLED_I2C_BEGIN_TIP = "Initializes the OLED display";
+Blockly.Msg.ARD_OLED_PRINT_TEXT = "print";
+Blockly.Msg.ARD_OLED_PRINT_TEXT_TIP = "Prints text on the OLED display";
 Blockly.Msg.ARD_OLED_CLEAR = "clear";
 Blockly.Msg.ARD_OLED_CLEAR_TIP = "Clears the OLED display";
 Blockly.Msg.ARD_OLED_SET_CURSOR = "set cursor";
-Blockly.Msg.ARD_OLED_SET_CURSOR_TIP =
-  "Sets the cursor to the specified position";
+Blockly.Msg.ARD_OLED_SET_CURSOR_TIP = "Sets the cursor to the specified position";
 Blockly.Msg.ARD_OLED_SET_CURSOR_POSITION = "position";
-Blockly.Msg.ARD_OLED_SET_CURSOR_POSITION_TIP =
-  "Sets the cursor to the specified position";
+Blockly.Msg.ARD_OLED_SET_CURSOR_POSITION_TIP = "Sets the cursor to the specified position";
+//add tip for oled_set_text_size
+Blockly.Msg.ARD_OLED_SET_TEXT_SIZE = "set text size";
+Blockly.Msg.ARD_OLED_SET_TEXT_SIZE_TIP = "Sets the text size for the OLED display";
+//add for oled_set_text_color
+Blockly.Msg.ARD_OLED_SET_TEXT_COLOR = "set text color";
+Blockly.Msg.ARD_OLED_SET_TEXT_COLOR_TIP = "Sets the text color for the OLED display";
+//add for oled_draw_pixel
+Blockly.Msg.ARD_OLED_DRAW_PIXEL = "draw pixel";
+Blockly.Msg.ARD_OLED_DRAW_PIXEL_TIP = "Draws a pixel on the OLED display";
+
+
   
 
 //add tips for servo

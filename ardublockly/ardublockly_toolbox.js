@@ -354,28 +354,6 @@ Ardublockly.TOOLBOX_XML =
   '    <block type="infinite_loop"></block>' +
   "  </category>" +
   "  <sep></sep>" +
-  '  <category id="catGrove" name="Groove">' +
-  '    <block type="grove_button"></block>' +
-  '    <block type="grove_joystick"></block>' +
-  "    <block type='grove_pir'></block>" +
-  "    <block type='grove_temperature'></block>" +
-  "    <block type='grove_led'>" +
-  "      <field name='CONNECTOR'>2</field>" +
-  "        <value name='STATE'>" +
-  "          <block type='io_highlow'>" +
-  "            <field name='STATE'>HIGH</field>" +
-  "          </block>" +
-  "        </value>" +
-  "    </block>" +
-  /*'    <block type=\'grove_lcd_rgb\'>'+
-'      <value name=\'LINE_1\'>'+
-'        <block type=\'text\'>'+
-'          <field name=\'TEXT\'>Hello world!</field>'+
-'        </block>'+
-'      </value>'+
-'    </block>'+*/
-  "  </category>" +
-  "  <sep></sep>" +
   '  <category id="catAudio" name="Audio">' +
   '    <block type="io_tone">' +
   '      <field name="TONEPIN">0</field>' +

@@ -18,10 +18,11 @@ Blockly.Arduino['keypad_setup'] = function(block) {
     Blockly.Arduino.addInclude('keypad', '#include <Keypad.h>');
     if(keypadType == '4x4'){
 
-
-        Blockly.Arduino.addDeclaration('keypad'+id, 'const byte ROWS = 4; //four rows\nconst byte COLS = 4; //four columns\nchar keys[ROWS][COLS] = {\n  {\'1\',\'2\',\'3\',\'A\'},\n  {\'4\',\'5\',\'6\',\'B\'},\n  {\'7\',\'8\',\'9\',\'C\'},\n  {\'*\',\'0\',\'#\',\'D\'}\n};\nbyte rowPins[ROWS] = {'+rows1+','+rows2+','+rows3+','+rows4+'}; //connect to the row pinouts of the keypad\nbyte colPins[COLS] = {'+cols1+','+cols2+','+cols3+','+cols4+'}; //connect to the column pinouts of the keypad\nKeypad keypad4x4 = Keypad( makeKeymap(keys), rowPins, colPins, ROWS, COLS );');
+        Blockly.Arduino.addDeclaration('keypad'+id, 'char keys'+id+'[4][4] = {\n  {\'1\',\'2\',\'3\',\'A\'},\n  {\'4\',\'5\',\'6\',\'B\'},\n  {\'7\',\'8\',\'9\',\'C\'},\n  {\'*\',\'0\',\'#\',\'D\'}\n};\nbyte rowPins'+id+'[4] = {'+rows1+','+rows2+','+rows3+','+rows4+'}; //connect to the row pinouts of the keypad\nbyte colPins'+id+'[4] = {'+cols1+','+cols2+','+cols3+','+cols4+'}; //connect to the column pinouts of the keypad\nKeypad keypad'+id+' = Keypad( makeKeymap(keys'+id+'), rowPins'+id+', colPins'+id+', 4, 4 );');
+        
     }else{
-        Blockly.Arduino.addDeclaration('keypad'+id, 'const byte ROWS = 4; //four rows\nconst byte COLS = 3; //three columns\nchar keys[ROWS][COLS] = {\n  {\'1\',\'2\',\'3\'},\n  {\'4\',\'5\',\'6\'},\n  {\'7\',\'8\',\'9\'},\n  {\'*\',\'0\',\'#\'},\n};\nbyte rowPins[ROWS] = {'+rows1+','+rows2+','+rows3+','+rows4+'}; //connect to the row pinouts of the keypad\nbyte colPins[COLS] = {'+cols1+','+cols2+','+cols3+'}; //connect to the column pinouts of the keypad\nKeypad keypad4x3 = Keypad( makeKeymap(keys), rowPins, colPins, ROWS, COLS );');
+
+        Blockly.Arduino.addDeclaration('keypad'+id, 'char keys'+id+'[4][3] = {\n  {\'1\',\'2\',\'3\'},\n  {\'4\',\'5\',\'6\'},\n  {\'7\',\'8\',\'9\'},\n  {\'*\',\'0\',\'#\'},\n};\nbyte rowPins'+id+'[4] = {'+rows1+','+rows2+','+rows3+','+rows4+'}; //connect to the row pinouts of the keypad\nbyte colPins'+id+'[3] = {'+cols1+','+cols2+','+cols3+'}; //connect to the column pinouts of the keypad\nKeypad keypad'+id+' = Keypad( makeKeymap(keys'+id+'), rowPins'+id+', colPins'+id+', 4, 3 );');
     }
     var code = '';
     return code;
