@@ -154,7 +154,7 @@ Blockly.Arduino.Boards.profiles.uno = {
 Blockly.Arduino.Boards.profiles.intel_galileo = {
   name: 'intel Galileo',
   description: 'intel Galileo standard compatible board',
-  compilerFlag: 'arduino:i586:intelgalileo',
+  compilerFlag: 'Intel:i586:izmir_fg',
   analogPins: Blockly.Arduino.Boards.generateAnalogIo(0, 5),
   digitalPins: Blockly.Arduino.Boards.generateDigitalIo(0, 13).concat(
                    Blockly.Arduino.Boards.generateAnalogIo(0, 5)),
