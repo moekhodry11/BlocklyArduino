@@ -20,35 +20,33 @@ goog.require("Blockly.Types");
 /** Common HSV hue for all blocks in this category. */
 Blockly.Blocks.lcd.HUE = 50;
 
+
 Blockly.Blocks["lcd_begin"] = {
   /**
-   * Block for creating a lcd.begin() function.
+   * Block for creating an lcd.begin() function.
    * @this Blockly.Block
    */
   init: function () {
     this.setHelpUrl("http://arduino.cc/en/Reference/LiquidCrystalBegin");
     this.setColour(Blockly.Blocks.lcd.HUE);
     this.appendDummyInput()
-      .appendField(Blockly.Msg.ARD_LCD_BEGIN)
       .appendField("Set LCD On")
       .appendField("lcd#")
       .appendField(
         new Blockly.FieldDropdown([["1"], ["2"], ["3"], ["4"]]),
-        "ID")
+        "ID"
+      )
       .appendField("lcd type")
       .appendField(
         new Blockly.FieldDropdown([["standard"], ["i2c"]]),
-        "LCDTYPE"
+        "LCDTYPE",
+        this.updateType_.bind(this)
       )
       .appendField("lcd size")
       .appendField(
         new Blockly.FieldDropdown([["16x2"], ["16x4"], ["20x4"]]),
         "LCDSIZE"
-      )
-
-
-    ;
-    
+      );
 
     // Initialize standard pin inputs (visible by default)
     this.standardPinsInput_ = this.appendDummyInput()
@@ -98,12 +96,14 @@ Blockly.Blocks["lcd_begin"] = {
           ["0x3D"],
         ]),
         "I2C_ADDRESS"
-      )
-      ;
+      );
 
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setTooltip(Blockly.Msg.ARD_LCD_BEGIN_TIP);
+
+    // Initialize with the default type
+    this.updateType_(this.getFieldValue("LCDTYPE"));
   },
 
   /**
@@ -111,26 +111,87 @@ Blockly.Blocks["lcd_begin"] = {
    * @param {string} type - The selected LCD type ('standard' or 'i2c').
    */
   updateType_: function (type) {
-    if (type === 'standard') {
+    if (type === "standard") {
       this.standardPinsInput_.setVisible(true);
       this.i2cAddressInput_.setVisible(false);
-    } else if (type === 'i2c') {
+    } else if (type === "i2c") {
       this.standardPinsInput_.setVisible(false);
       this.i2cAddressInput_.setVisible(true);
+    }
+    this.render();
+  },
+
+  /**
+   * Called whenever the block's fields change.
+   * Checks for pin conflicts and updates inputs based on the selected LCD type.
+   */
+  onchange: function () {
+    var warnings = [];
+
+    this.updateType_(this.getFieldValue("LCDTYPE"));
+    // Check for local duplicate pin assignments within the block
+    var currentPins = this.getCurrentPins_();
+    var duplicates = currentPins.filter(
+      (item, index) => currentPins.indexOf(item) != index
+    );
+    if (duplicates.length > 0) {
+      warnings.push("Duplicate pin assignments detected within the block!");
+    }
+
+    // Check against all blocks in the workspace for conflicts
+    var blocks = Blockly.getMainWorkspace().getAllBlocks();
+    blocks.forEach((block) => {
+      if (block.id !== this.id) {
+        if (block.type === "lcd_begin" || block.type === "keypad_setup") {
+          // Check conflicts with other instances of LCD or keypad setups
+          var otherPins = block.getCurrentPins_();
+          var conflicts = currentPins.filter((pin) => otherPins.includes(pin));
+          if (conflicts.length > 0) {
+            warnings.push(
+              "Pin conflicts with another LCD or keypad setup block."
+            );
+          }
+        } else if (
+          block.type === "io_digitalwrite" ||
+          block.type === "io_digitalread"
+        ) {
+          // Check conflicts with io_digitalwrite and io_digitalread blocks
+          var pin = block.getFieldValue("PIN");
+          if (currentPins.includes(pin)) {
+            warnings.push(
+              "Pin " + pin + " is used both in LCD and another block."
+            );
+          }
+        }
+      }
+    });
+
+    if (warnings.length > 0) {
+      this.setWarningText(warnings.join("\n"));
+    } else {
+      this.setWarningText(null);
     }
   },
 
   /**
-   * Called whenever the LCD type field changes.
-   * Updates the inputs based on the selected LCD type.
+   * Retrieves the current pin assignments of this LCD block.
    */
-  onchange: function () {
-    var type = this.getFieldValue('LCDTYPE');
-    this.updateType_(type);
-  }
+  getCurrentPins_: function () {
+    var pins = [];
+    var type = this.getFieldValue("LCDTYPE");
+    if (type === "standard") {
+      pins = [
+        this.getFieldValue("RS"),
+        this.getFieldValue("EN"),
+        this.getFieldValue("D4"),
+        this.getFieldValue("D5"),
+        this.getFieldValue("D6"),
+        this.getFieldValue("D7"),
+      ];
+    }
+    return pins;
+  },
 };
-
-
 
 
 
@@ -156,8 +217,53 @@ Blockly.Blocks["lcd_print"] = {
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setTooltip(Blockly.Msg.ARD_LCD_PRINT_TIP);
+
+    // Initialize the warning to null
+    this.setWarningText(null);
+
+    // Call onchange to initialize warnings and checks
+    this.onchange();
+  },
+
+  /**
+   * Called whenever the block's fields change.
+   * Checks if the init block for this lcd# has been dragged before using this block.
+   */
+  onchange: function () {
+    var lcdId = this.getFieldValue("ID");
+    this.checkInitBlockPresence_(lcdId);
+  },
+
+  /**
+   * Checks if the init block for the specified lcd# has been dragged before using this block.
+   * @param {string} lcdId - The ID of the LCD (e.g., "1", "2", etc.).
+   */
+  checkInitBlockPresence_: function (lcdId) {
+    var warnings = [];
+
+    // Check if there is an lcd_setup block with the same ID
+    var initBlockExists = false;
+    var blocks = Blockly.getMainWorkspace().getAllBlocks();
+    blocks.forEach((block) => {
+      if (block.type === "lcd_begin" && block.getFieldValue("ID") === lcdId) {
+        initBlockExists = true;
+      }
+    });
+
+    // If no init block is found, issue a warning
+    if (!initBlockExists) {
+      warnings.push("Initialize the LCD#" + lcdId + " first using lcd setup block.");
+    }
+
+    // Set or clear warning text based on the presence of init block
+    if (warnings.length > 0) {
+      this.setWarningText(warnings.join("\n"));
+    } else {
+      this.setWarningText(null);
+    }
   },
 };
+
 
 Blockly.Blocks["lcd_set_cursor"] = {
   /**
@@ -183,8 +289,53 @@ Blockly.Blocks["lcd_set_cursor"] = {
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setTooltip(Blockly.Msg.ARD_LCD_SET_CURSOR_TIP);
+
+    // Initialize the warning to null
+    this.setWarningText(null);
+
+    // Call onchange to initialize warnings and checks
+    this.onchange();
+  },
+
+  /**
+   * Called whenever the block's fields change.
+   * Checks if the init block for this lcd# has been dragged before using this block.
+   */
+  onchange: function () {
+    var lcdId = this.getFieldValue("ID");
+    this.checkInitBlockPresence_(lcdId);
+  },
+
+  /**
+   * Checks if the init block for the specified lcd# has been dragged before using this block.
+   * @param {string} lcdId - The ID of the LCD (e.g., "1", "2", etc.).
+   */
+  checkInitBlockPresence_: function (lcdId) {
+    var warnings = [];
+
+    // Check if there is an lcd_begin block with the same ID
+    var initBlockExists = false;
+    var blocks = Blockly.getMainWorkspace().getAllBlocks();
+    blocks.forEach((block) => {
+      if (block.type === "lcd_begin" && block.getFieldValue("ID") === lcdId) {
+        initBlockExists = true;
+      }
+    });
+
+    // If no init block is found, issue a warning
+    if (!initBlockExists) {
+      warnings.push("Initialize the LCD#" + lcdId + " first using lcd setup block.");
+    }
+
+    // Set or clear warning text based on the presence of init block
+    if (warnings.length > 0) {
+      this.setWarningText(warnings.join("\n"));
+    } else {
+      this.setWarningText(null);
+    }
   },
 };
+
 
 Blockly.Blocks["lcd_clear"] = {
   /**
@@ -204,5 +355,49 @@ Blockly.Blocks["lcd_clear"] = {
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setTooltip(Blockly.Msg.ARD_LCD_CLEAR_TIP);
+
+    // Initialize the warning to null
+    this.setWarningText(null);
+
+    // Call onchange to initialize warnings and checks
+    this.onchange();
+  },
+
+  /**
+   * Called whenever the block's fields change.
+   * Checks if the init block for this lcd# has been dragged before using this block.
+   */
+  onchange: function () {
+    var lcdId = this.getFieldValue("ID");
+    this.checkInitBlockPresence_(lcdId);
+  },
+
+  /**
+   * Checks if the init block for the specified lcd# has been dragged before using this block.
+   * @param {string} lcdId - The ID of the LCD (e.g., "1", "2", etc.).
+   */
+  checkInitBlockPresence_: function (lcdId) {
+    var warnings = [];
+
+    // Check if there is an lcd_begin block with the same ID
+    var initBlockExists = false;
+    var blocks = Blockly.getMainWorkspace().getAllBlocks();
+    blocks.forEach((block) => {
+      if (block.type === "lcd_begin" && block.getFieldValue("ID") === lcdId) {
+        initBlockExists = true;
+      }
+    });
+
+    // If no init block is found, issue a warning
+    if (!initBlockExists) {
+      warnings.push("Initialize the LCD#" + lcdId + " first using lcd setup block.");
+    }
+
+    // Set or clear warning text based on the presence of init block
+    if (warnings.length > 0) {
+      this.setWarningText(warnings.join("\n"));
+    } else {
+      this.setWarningText(null);
+    }
   },
 };
