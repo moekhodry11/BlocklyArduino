@@ -7,7 +7,7 @@ Blockly.Arduino.ultrasonic_read = function () {
   var pinEcho = this.getFieldValue("ECHO");
   var code = "readUltrasonic(" + pinTrigger + ", " + pinEcho + ")";
   Blockly.Arduino.definitions_["define_ultrasonic"] =
-    "long readUltrasonic(int trigPin, int echoPin) {\n  long duration, distance;\n  digitalWrite(trigPin, LOW);\n  delayMicroseconds(2);\n  digitalWrite(trigPin, HIGH);\n  delayMicroseconds(10);\n  digitalWrite(trigPin, LOW);\n  duration = pulseIn(echoPin, HIGH);\n  distance = (duration/2) / 29.1;\n  return distance;\n}\n";
+    "int readUltrasonic(int trigPin, int echoPin) {\n  long duration;\n  int distance;\n  digitalWrite(trigPin, LOW);\n  delayMicroseconds(2);\n  digitalWrite(trigPin, HIGH);\n  delayMicroseconds(10);\n  digitalWrite(trigPin, LOW);\n  duration = pulseIn(echoPin, HIGH);\n  distance = (duration/2) / 29.1;\n  return distance;\n}\n";
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 

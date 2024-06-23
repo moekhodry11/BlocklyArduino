@@ -173,7 +173,6 @@ Ardublockly.TOOLBOX_XML =
   '  <category id="catKeypad" name="Keypad">' +
   '    <block type="keypad_setup">' +
   '      <field name="ID">1</field>' +
-
   '      <field name="KEYPAD_TYPE">4x3</field>' +
   '      <field name="ROWS1">0</field>' +
   '      <field name="ROWS2">1</field>' +
@@ -186,15 +185,15 @@ Ardublockly.TOOLBOX_XML =
   "    </block>" +
   '    <block type="keypad_get_key">' +
   '      <field name="ID">1</field>' +
-
-
   "    </block>" +
   "  </category>" +
   "  <sep></sep>" +
   //SD Card
 
   '  <category id="catSDCard" name="SD Card">' +
-  '    <block type="sdcard_setup"></block>' +
+  '    <block type="sdcard_setup">' +
+  '      <field name="CS">4</field>' +
+  "    </block>" +
   '    <block type="sdcard_open">' +
   '      <value name="FILENAME">' +
   '        <block type="text"></block>' +
@@ -234,16 +233,14 @@ Ardublockly.TOOLBOX_XML =
 
   '  <category id="catLDR" name="LDR">' +
   '    <block type="ldr_setup">' +
-
   '      <field name="ID">1</field>' +
-  '      <field name="PIN">0</field>' +
+  '      <field name="PIN">A0</field>' +
   "    </block>" +
   '    <block type="ldr_read">' +
   '      <field name="ID">1</field>' +
   "    </block>" +
   "  </category>" +
   "  <sep></sep>" +
-
   //oled
 
   '  <category id="catOLED" name="OLED">' +
@@ -280,7 +277,7 @@ Ardublockly.TOOLBOX_XML =
   '    <block type="oled_set_text_size">' +
   '      <field name="ID">1</field>' +
   '      <field name="SIZE">1</field>' +
-  '    </block>' +
+  "    </block>" +
   '    <block type="oled_set_text_color">' +
   '      <field name="ID">1</field>' +
   '      <field name="COLOR">White</field>' +
@@ -298,10 +295,8 @@ Ardublockly.TOOLBOX_XML =
   "      </value>" +
   '      <field name="ID">1</field>' +
   "    </block>" +
-
   "  </category>" +
   "  <sep></sep>" +
-
   '  <category id="catInputOutput" name="Input/Output">' +
   '    <block type="io_digitalwrite">' +
   '      <value name="STATE">' +

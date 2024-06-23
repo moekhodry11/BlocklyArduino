@@ -24,11 +24,15 @@ goog.require('Blockly.Arduino');
 //set sdcard on pin 10 and add spi and sd library make object of File and check if sd card is present or not
 
 Blockly.Arduino['sdcard_setup'] = function(block) {
+
+    /* get the dropdown value */
+    var cs = block.getFieldValue('CS');
+
     Blockly.Arduino.addInclude('sdcard', '#include <SD.h>\n#include <SPI.h>');
 
     Blockly.Arduino.addDeclaration('sdcard', 'File myFile;');
 
-    Blockly.Arduino.addSetup('sdcard', 'pinMode(10, OUTPUT);\n  if (!SD.begin(4)) {\n    Serial.println("initialization failed!");\n    return;\n}\nSerial.println("initialization done.");', true);
+    Blockly.Arduino.addSetup('sdcard', 'pinMode(10, OUTPUT);\n  if (!SD.begin('+cs+')) {\n    Serial.println("initialization failed!");\n    return;\n}\nSerial.println("initialization done.");', true);
     var code = '';
     return code;
     }
