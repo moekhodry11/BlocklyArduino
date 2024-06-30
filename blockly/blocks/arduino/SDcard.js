@@ -19,7 +19,6 @@ goog.require('Blockly.Types');
 
 
 Blockly.Blocks.sdcard.HUE = 70;
-
 Blockly.Blocks['sdcard_setup'] = {
   init: function() {
     this.appendDummyInput()
@@ -37,12 +36,34 @@ Blockly.Blocks['sdcard_setup'] = {
     this.setTooltip('Setup the SD Card');
     this.setHelpUrl('http://arduino.cc/en/Reference/SD');
 
-        },
+    // Check for duplicate blocks when initialized
+    this.checkDuplicateBlock();
+  },
 
-      
+  // Check for duplicate blocks when modified
+  onchange: function () {
+    this.checkDuplicateBlock();
+  },
 
+  checkDuplicateBlock: function () {
+    var blocks = Blockly.getMainWorkspace().getAllBlocks();
+    var sdCardSetupCount = 0;
+    var thisBlock = this;
 
+    blocks.forEach(function (block) {
+      if (block.type === thisBlock.type && block.id !== thisBlock.id) {
+        sdCardSetupCount++;
+      }
+    });
+
+    if (sdCardSetupCount > 0) {
+      this.setWarningText("Only one SD Card setup block allowed.");
+    } else {
+      this.setWarningText(null);
+    }
+  }
 };
+
 
 
 Blockly.Blocks['sdcard_open'] = {
@@ -53,6 +74,7 @@ Blockly.Blocks['sdcard_open'] = {
     this.appendDummyInput()
         .appendField("Mode")
         .appendField(new Blockly.FieldDropdown([["READ", "READ"], ["WRITE", "WRITE"]]), "MODE");
+        this.setCommentText("sdcard_open");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(Blockly.Blocks.sdcard.HUE);
@@ -101,6 +123,7 @@ Blockly.Blocks['sdcard_write'] = {
     this.appendValueInput("DATA")
         .setCheck(Blockly.Types.TEXT.checkList)
         .appendField("Write to file");
+        this.setCommentText("sdcard_write");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(Blockly.Blocks.sdcard.HUE);
@@ -146,6 +169,7 @@ Blockly.Blocks['sdcard_read'] = {
   init: function() {
     this.appendDummyInput()
         .appendField("Read from file");
+        this.setCommentText("sdcard_read");
     this.setOutput(true, Blockly.Types.TEXT.output);
     this.setColour(Blockly.Blocks.sdcard.HUE);
     this.setTooltip('Read from a file on the SD Card');
@@ -193,6 +217,7 @@ Blockly.Blocks['sdcard_close'] = {
   init: function() {
     this.appendDummyInput()
         .appendField("Close file");
+        this.setCommentText("sdcard_close");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(Blockly.Blocks.sdcard.HUE);

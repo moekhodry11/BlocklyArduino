@@ -6,10 +6,9 @@ goog.require("Blockly.Blocks");
 goog.require("Blockly.Types");
 
 Blockly.Blocks.oled.HUE = 100;
-
 Blockly.Blocks["oled_i2c_begin"] = {
   init: function () {
-    this.setHelpUrl("http://arduino.cc/en/Reference/LiquidCrystalBegin");
+    this.setHelpUrl("https://sensorkit.arduino.cc/sensorkit/module/lessons/lesson/10-the-oled-screen");
     this.setColour(Blockly.Blocks.oled.HUE);
     this.appendDummyInput()
       .appendField(Blockly.Msg.ARD_OLED_I2C_BEGIN)
@@ -45,7 +44,7 @@ Blockly.Blocks["oled_i2c_begin"] = {
 
   /**
    * Called whenever the block's fields change.
-   * Checks for the presence of an oled_i2c_begin block and sets a warning if it is not found.
+   * Checks for the presence of another oled_i2c_begin block with the same address and sets a warning if found.
    */
   onchange: function () {
     // Use debounce to delay warning update after block placement
@@ -53,35 +52,38 @@ Blockly.Blocks["oled_i2c_begin"] = {
       clearTimeout(this.debounceTimer_);
     }
     this.debounceTimer_ = setTimeout(() => {
-      this.checkInitBlockPresence_();
+      this.checkDuplicateAddress_();
     }, 200); // Adjust delay time as needed (200ms in this example)
   },
 
   /**
-   * Checks if the oled_i2c_begin block is present in the workspace.
-   * Sets a warning if the oled_i2c_begin block is not found.
+   * Checks if there is another oled_i2c_begin block with the same address in the workspace.
+   * Sets a warning if a duplicate address is found.
    */
-  checkInitBlockPresence_: function () {
-    var initBlockExists = false;
+  checkDuplicateAddress_: function () {
+    var address = this.getFieldValue("ADDRESS");
     var blocks = Blockly.getMainWorkspace().getAllBlocks();
+    var duplicateExists = false;
+    
     blocks.forEach((block) => {
-      if (block.type === "oled_i2c_begin") {
-        initBlockExists = true;
+      if (block.type === "oled_i2c_begin" && block.id !== this.id && block.getFieldValue("ADDRESS") === address) {
+        duplicateExists = true;
       }
     });
 
-    // If no init block is found, issue a warning
-    if (!initBlockExists) {
-      this.setWarningText('Initialize the OLED display first using the oled_i2c_begin block.');
+    // If a duplicate address is found, issue a warning
+    if (duplicateExists) {
+      this.setWarningText('Another OLED display is already using this I2C address.');
     } else {
       this.setWarningText(null);
     }
   }
 };
 
+
 Blockly.Blocks["oled_print_text"] = {
   init: function () {
-    this.setHelpUrl("http://arduino.cc/en/Reference/LiquidCrystalPrint");
+    this.setHelpUrl("https://sensorkit.arduino.cc/sensorkit/module/lessons/lesson/10-the-oled-screen");
     this.setColour(Blockly.Blocks.oled.HUE);
     this.appendValueInput("TEXT")
       .appendField("Print to OLED")
@@ -94,6 +96,7 @@ Blockly.Blocks["oled_print_text"] = {
         "ID"
       );
 
+    this.setCommentText("oled_print_text");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setTooltip(Blockly.Msg.ARD_OLED_PRINT_TEXT_TIP);
@@ -148,7 +151,7 @@ Blockly.Blocks["oled_print_text"] = {
 
 Blockly.Blocks['oled_set_cursor'] = {
   init: function() {
-    this.setHelpUrl('http://arduino.cc/en/Reference/LiquidCrystalSetCursor');
+    this.setHelpUrl('https://sensorkit.arduino.cc/sensorkit/module/lessons/lesson/10-the-oled-screen');
     this.setColour(Blockly.Blocks.oled.HUE);
     this.appendDummyInput()
       .appendField("Set cursor position")
@@ -167,6 +170,7 @@ Blockly.Blocks['oled_set_cursor'] = {
         new Blockly.FieldDropdown([["1"], ["2"], ["3"], ["4"]]),
         "ID"
       );
+      this.setCommentText("oled_set_cursor");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setTooltip(Blockly.Msg.ARD_OLED_SET_CURSOR_TIP);
@@ -221,7 +225,7 @@ Blockly.Blocks['oled_set_cursor'] = {
 
 Blockly.Blocks['oled_clear'] = {
   init: function() {
-    this.setHelpUrl('http://arduino.cc/en/Reference/LiquidCrystalClear');
+    this.setHelpUrl('https://sensorkit.arduino.cc/sensorkit/module/lessons/lesson/10-the-oled-screen');
     this.setColour(Blockly.Blocks.oled.HUE);
     this.appendDummyInput()
       .appendField("Clear OLED #")
@@ -229,6 +233,7 @@ Blockly.Blocks['oled_clear'] = {
         new Blockly.FieldDropdown([["1"], ["2"], ["3"], ["4"]]),
         "ID"
       );
+    this.setCommentText("oled_clear");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setTooltip(Blockly.Msg.ARD_OLED_CLEAR_TIP);
@@ -283,7 +288,7 @@ Blockly.Blocks['oled_clear'] = {
 
 Blockly.Blocks['oled_set_text_size'] = {
   init: function() {
-    this.setHelpUrl('http://arduino.cc/en/Reference/LiquidCrystalSetTextSize');
+    this.setHelpUrl('https://sensorkit.arduino.cc/sensorkit/module/lessons/lesson/10-the-oled-screen');
     this.setColour(Blockly.Blocks.oled.HUE);
     this.appendDummyInput()
       .appendField("Set text size")
@@ -296,6 +301,7 @@ Blockly.Blocks['oled_set_text_size'] = {
         new Blockly.FieldDropdown([["1"], ["2"], ["3"], ["4"]]),
         "ID"
       );
+    this.setCommentText("oled_set_text_size");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setTooltip(Blockly.Msg.ARD_OLED_SET_TEXT_SIZE_TIP);
@@ -349,7 +355,7 @@ Blockly.Blocks['oled_set_text_size'] = {
 
 Blockly.Blocks['oled_set_text_color'] = {
   init: function() {
-    this.setHelpUrl('http://arduino.cc/en/Reference/LiquidCrystalSetTextColor');
+    this.setHelpUrl('https://sensorkit.arduino.cc/sensorkit/module/lessons/lesson/10-the-oled-screen');
     this.setColour(Blockly.Blocks.oled.HUE);
     this.appendDummyInput()
       .appendField("Set text color")
@@ -362,6 +368,7 @@ Blockly.Blocks['oled_set_text_color'] = {
         new Blockly.FieldDropdown([["1"], ["2"], ["3"], ["4"]]),
         "ID"
       );
+      this.setCommentText("oled_set_text_color");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setTooltip(Blockly.Msg.ARD_OLED_SET_TEXT_COLOR_TIP);
@@ -414,7 +421,7 @@ Blockly.Blocks['oled_set_text_color'] = {
 
 Blockly.Blocks['oled_draw_pixel'] = {
   init: function() {
-    this.setHelpUrl('http://arduino.cc/en/Reference/LiquidCrystalDrawPixel');
+    this.setHelpUrl('https://sensorkit.arduino.cc/sensorkit/module/lessons/lesson/10-the-oled-screen');
     this.setColour(Blockly.Blocks.oled.HUE);
     this.appendDummyInput()
       .appendField("Draw pixel at")
@@ -438,6 +445,7 @@ Blockly.Blocks['oled_draw_pixel'] = {
         new Blockly.FieldDropdown([["1"], ["2"], ["3"], ["4"]]),
         "ID"
       );
+      this.setCommentText("oled_draw_pixel");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setTooltip(Blockly.Msg.ARD_OLED_DRAW_PIXEL_TIP);

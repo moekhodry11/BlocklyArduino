@@ -6,9 +6,11 @@ goog.require("Blockly.Types");
 Blockly.Blocks.ldr.HUE = 230;
 Blockly.Blocks["ldr_read"] = {
   init: function() {
+    this.setHelpUrl("https://www.arduino.cc/reference/en/language/functions/analog-io/analogread/");
     this.appendDummyInput()
         .appendField("Read LDR Sensor")
         .appendField(new Blockly.FieldDropdown(Blockly.Arduino.Boards.selected.analogPins), "PIN");
+        this.setCommentText("ldr_read");
     this.setOutput(true, "Number");
     this.setColour(Blockly.Blocks.ldr.HUE);
     this.setTooltip("Read the LDR Sensor");

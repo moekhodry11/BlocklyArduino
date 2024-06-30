@@ -36,7 +36,12 @@ Blockly.Arduino['sdcard_setup'] = function(block) {
 
     Blockly.Arduino.addDeclaration('sdcard', 'File myFile;');
 
-    Blockly.Arduino.addSetup('sdcard', 'pinMode(10, OUTPUT);\n  if (!SD.begin('+cs+')) {\n    Serial.println("initialization failed!");\n    return;\n}\nSerial.println("initialization done.");', true);
+    // Blockly.Arduino.addSetup('sdcard', 'pinMode(10, OUTPUT);\n  if (!SD.begin('+cs+')) {\n    Serial.println("initialization failed!");\n    return;\n}\nSerial.println("initialization done.");', true);
+    // var code = '';
+    // return code;
+    // }
+
+    Blockly.Arduino.addSetup('sdcard', 'if (!SD.begin('+cs+')) {\n    Serial.println("initialization failed!");\n    return;\n}\nSerial.println("initialization done.");', true);
     var code = '';
     return code;
     }

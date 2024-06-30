@@ -8,6 +8,7 @@ goog.require("Blockly.Types");
 Blockly.Blocks.keypad.HUE = 0;
 Blockly.Blocks["keypad_setup"] = {
   init: function () {
+    this.setHelpUrl("https://www.arduino.cc/reference/en/libraries/keypad/");
     this.appendDummyInput()
       .appendField("Setup Keypad#")
       .appendField(
@@ -80,6 +81,61 @@ Blockly.Blocks["keypad_setup"] = {
       this.updateCols_(keypadType);
       this.setFieldValue(keypadType, 'KEYPAD_TYPE');
     };
+
+    // Check for duplicates when initialized
+    this.checkDuplicateBlock();
+  },
+
+  // Check for duplicates when modified
+  onchange: function () {
+    this.checkDuplicateBlock();
+  },
+
+  checkDuplicateBlock: function () {
+    var blocks = Blockly.getMainWorkspace().getAllBlocks();
+    var duplicateExists = false;
+    var thisBlock = this;
+    var thisID = this.getFieldValue("ID");
+    var thisROWS1 = this.getFieldValue("ROWS1");
+    var thisROWS2 = this.getFieldValue("ROWS2");
+    var thisROWS3 = this.getFieldValue("ROWS3");
+    var thisROWS4 = this.getFieldValue("ROWS4");
+    var thisCOLS1 = this.getFieldValue("COLS1");
+    var thisCOLS2 = this.getFieldValue("COLS2");
+    var thisCOLS3 = this.getFieldValue("COLS3");
+
+    blocks.forEach(function (block) {
+      if (block.type === thisBlock.type && block.id !== thisBlock.id) {
+        var blockID = block.getFieldValue("ID");
+        var blockROWS1 = block.getFieldValue("ROWS1");
+        var blockROWS2 = block.getFieldValue("ROWS2");
+        var blockROWS3 = block.getFieldValue("ROWS3");
+        var blockROWS4 = block.getFieldValue("ROWS4");
+        var blockCOLS1 = block.getFieldValue("COLS1");
+        var blockCOLS2 = block.getFieldValue("COLS2");
+        var blockCOLS3 = block.getFieldValue("COLS3");
+
+        // Check if all fields match
+        if (
+          blockID === thisID &&
+          blockROWS1 === thisROWS1 &&
+          blockROWS2 === thisROWS2 &&
+          blockROWS3 === thisROWS3 &&
+          blockROWS4 === thisROWS4 &&
+          blockCOLS1 === thisCOLS1 &&
+          blockCOLS2 === thisCOLS2 &&
+          blockCOLS3 === thisCOLS3
+        ) {
+          duplicateExists = true;
+        }
+      }
+    });
+
+    if (duplicateExists) {
+      this.setWarningText("Duplicate Keypad setup with the same configuration.");
+    } else {
+      this.setWarningText(null);
+    }
   },
 
   updateCols_: function (size) {
@@ -101,14 +157,17 @@ Blockly.Blocks["keypad_setup"] = {
 };
 
 
+
 Blockly.Blocks["keypad_get_key"] = {
   init: function () {
+    this.setHelpUrl("https://www.arduino.cc/reference/en/libraries/usbhost/getkey/");
     this.appendDummyInput()
       .appendField("Get Key from Keypad#")
       .appendField(
         new Blockly.FieldDropdown([["1"], ["2"], ["3"], ["4"]]),
         "ID"
       );
+    this.setCommentText("keypad_get_key");
     this.setOutput(true, "String");
     this.setColour(Blockly.Blocks.keypad.HUE);
     this.setTooltip(Blockly.Msg.ARD_KEYPAD_GET_KEY_TIP);

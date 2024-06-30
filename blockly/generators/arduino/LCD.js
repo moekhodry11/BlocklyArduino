@@ -94,3 +94,12 @@ Blockly.Arduino['lcd_clear'] = function(block) {
   var code = 'lcd_'+id+'.clear();\n';
   return code;
 }
+
+
+//comment block
+
+Blockly.Arduino['lcd_comment'] = function(block) {
+  var comment = block.getFieldValue('comment');
+  var code = '// ' + comment + '\n';
+  return code;
+}
