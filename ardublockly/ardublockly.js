@@ -119,7 +119,7 @@ Ardublockly.bindActionFunctions = function() {
                              ArdublocklyServer.setCompilerLocation,
                              Ardublockly.setCompilerLocationHtml);
   settingsPathInputListeners('settings_sketch_location',
-                             ArdublocklyServer.setSketchLocationHtml,
+                             ArdublocklyServer.setSketchLocation,
                              Ardublockly.setSketchLocationHtml);
 };
 
