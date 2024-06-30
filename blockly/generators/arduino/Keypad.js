@@ -17,23 +17,23 @@ Blockly.Arduino['keypad_setup'] = function(block) {
     var cols4 = block.getFieldValue('COLS4');
     
     Blockly.Arduino.reservePin(
-        block, rows1, Blockly.Arduino.PinTypes.OUTPUT, 'Digital Write');
+        block, rows1, Blockly.Arduino.PinTypes.OUTPUT, 'ROWS1');
         Blockly.Arduino.reservePin(
-            block, rows2, Blockly.Arduino.PinTypes.OUTPUT, 'Digital Write');
+            block, rows2, Blockly.Arduino.PinTypes.OUTPUT, 'ROWS2');
             Blockly.Arduino.reservePin(
-                block, rows3, Blockly.Arduino.PinTypes.OUTPUT, 'Digital Write');
+                block, rows3, Blockly.Arduino.PinTypes.OUTPUT, 'ROWS3');
                 Blockly.Arduino.reservePin(
-                    block, rows4, Blockly.Arduino.PinTypes.OUTPUT, 'Digital Write');
+                    block, rows4, Blockly.Arduino.PinTypes.OUTPUT, 'ROWS4');
 
 
                     Blockly.Arduino.reservePin(
-                        block, cols1, Blockly.Arduino.PinTypes.INPUT, 'Digital Read');
+                        block, cols1, Blockly.Arduino.PinTypes.INPUT, 'COLS1');
                         Blockly.Arduino.reservePin(
-                            block, cols2, Blockly.Arduino.PinTypes.INPUT, 'Digital Read');
+                            block, cols2, Blockly.Arduino.PinTypes.INPUT, 'COLS2');
                             Blockly.Arduino.reservePin(
-                                block, cols3, Blockly.Arduino.PinTypes.INPUT, 'Digital Read');
+                                block, cols3, Blockly.Arduino.PinTypes.INPUT, 'COLS3');
                                 Blockly.Arduino.reservePin(
-                                    block, cols4, Blockly.Arduino.PinTypes.INPUT, 'Digital Read');
+                                    block, cols4, Blockly.Arduino.PinTypes.INPUT, 'COLS4');
 
 
                                     

@@ -68,10 +68,6 @@ Blockly.Arduino['lcd_begin'] = function(block) {
       Blockly.Arduino.setups_['setup_lcd_' + id] = 'lcd_' + id + '.init();\nlcd_' + id + '.backlight();';
   }
 
-  
-  Blockly.Arduino.reservePin(
-    block, rs, Blockly.Arduino.PinTypes.OUTPUT, 'Digital Write');
-
   return '';
 };
 

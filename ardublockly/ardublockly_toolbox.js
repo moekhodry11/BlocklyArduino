@@ -221,7 +221,6 @@ Ardublockly.TOOLBOX_XML =
   '    <block type="ldr_read">' +
   '      <field name="PIN">A0</field>' +
   "    </block>" +
-
   //oled
 
   '    <block type="oled_i2c_begin">' +
@@ -351,6 +350,31 @@ Ardublockly.TOOLBOX_XML =
   "      </value>" +
   "    </block>" +
   '    <block type="servo_read"></block>' +
+  //dc motor
+
+  //dc motor init
+  '    <block type="setup_motor">' +
+  '      <field name="MOTOR_NUMBER">1</field>' +
+  '      <field name="IN1">1</field>' +
+  '      <field name="IN2">2</field>' +
+  '      <field name="ENA">3</field>' +
+  "    </block>" +
+  //dc motor control
+  '    <block type="control_motor">' +
+  '      <field name="MOTOR_NUMBER">1</field>' +
+  '      <value name="SPEED">' +
+  '        <block type="math_number">' +
+  '          <field name="NUM">150</field>' +
+  "        </block>" +
+  "      </value>" +
+  "    </block>" +
+  
+  
+  
+
+
+
+
   '    <block type="stepper_config">' +
   '      <field name="STEPPER_NUMBER_OF_PINS">2</field>' +
   '      <field name="STEPPER_PIN1">1</field>' +
