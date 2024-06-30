@@ -133,6 +133,12 @@ Ardublockly.TOOLBOX_XML =
   //make one category called it Interce
 
   '  <category id="catInteface" name="Inteface">' +
+   //comment block
+   '    <block type="lcd_comment">' +
+   '      <value name="TEXT">' +
+   '        <block type="text"></block>' +
+   "      </value>" +
+   "    </block>" +
   //LCD
   '    <block type="lcd_begin">' +
   '      <field name="ID">1</field>' +
@@ -168,6 +174,9 @@ Ardublockly.TOOLBOX_XML =
   '    <block type="lcd_clear">' +
   '      <field name="ID">1</field>' +
   "    </block>" +
+ 
+
+
   //Keypad
 
   '    <block type="keypad_setup">' +

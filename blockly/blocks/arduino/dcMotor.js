@@ -7,6 +7,7 @@ Blockly.Blocks.ultrasonic.HUE = 150;
 
 Blockly.Blocks['setup_motor'] = {
   init: function() {
+    this.setHelpUrl("https://reference.arduino.cc/reference/en/libraries/dcmotor/");
     this.appendDummyInput()
         .appendField("Setup Motor")
         .appendField("Motor #")
@@ -37,6 +38,7 @@ Blockly.Blocks['setup_motor'] = {
 };
 Blockly.Blocks['control_motor'] = {
   init: function() {
+    this.setHelpUrl("https://reference.arduino.cc/reference/en/libraries/dcmotor/");
     this.appendDummyInput()
         .appendField("Control Motor")
         .appendField("Motor #")

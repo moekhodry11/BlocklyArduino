@@ -6,6 +6,7 @@ goog.require("Blockly.Types");
 Blockly.Blocks.ultrasonic.HUE = 150;
 Blockly.Blocks["ultrasonic_setup"] = {
   init: function () {
+    this.setHelpUrl("https://www.arduino.cc/reference/en/libraries/ultrasonic/");
     this.appendDummyInput()
       .appendField("Setup Ultrasonic Sensor")
       .appendField("trigger pin")
@@ -18,6 +19,7 @@ Blockly.Blocks["ultrasonic_setup"] = {
         new Blockly.FieldDropdown(Blockly.Arduino.Boards.selected.digitalPins),
         "ECHO"
       );
+
     this.setPreviousStatement(true, null);
     this.setInputsInline(false);
     this.setNextStatement(true, null);
@@ -25,27 +27,45 @@ Blockly.Blocks["ultrasonic_setup"] = {
     this.setTooltip("Setup the Ultrasonic Sensor");
     this.setHelpUrl("");
 
-
-   
+    // Call onchange to initialize warnings
+    this.onchange();
   },
 
-  updateFields: function () {
-    Blockly.Arduino.Boards.refreshBlockFieldDropdown(
-      this,
-      "TRIG",
-      "digitalPins"
-    );
-    Blockly.Arduino.Boards.refreshBlockFieldDropdown(
-      this,
-      "ECHO",
-      "digitalPins"
-    );
+  // Check if this block is the first block or duplicated and show warning
+  onchange: function () {
+    this.checkDuplicateBlock();
   },
 
+  checkDuplicateBlock: function () {
+    var blocks = Blockly.getMainWorkspace().getAllBlocks();
+    var duplicateExists = false;
+    var thisBlock = this;
+    var thisTRIG = this.getFieldValue("TRIG");
+    var thisECHO = this.getFieldValue("ECHO");
+
+    blocks.forEach(function (block) {
+      if (block.type === thisBlock.type && block.id !== thisBlock.id) {
+        var blockTRIG = block.getFieldValue("TRIG");
+        var blockECHO = block.getFieldValue("ECHO");
+        if (blockTRIG === thisTRIG || blockECHO === thisECHO) {
+          duplicateExists = true;
+        }
+      }
+    });
+
+    if (duplicateExists) {
+      this.setWarningText("Duplicate Ultrasonic Sensor setup with the same pins.");
+    } else {
+      this.setWarningText(null);
+    }
+  },
 };
+
+
 
 Blockly.Blocks["ultrasonic_read"] = {
   init: function () {
+    this.setHelpUrl("https://www.arduino.cc/reference/en/libraries/ultrasonic/");
     this.appendDummyInput()
       .appendField("Read Ultrasonic Sensor")
       .appendField("trigger pin")
@@ -58,6 +78,7 @@ Blockly.Blocks["ultrasonic_read"] = {
         new Blockly.FieldDropdown(Blockly.Arduino.Boards.selected.digitalPins),
         "ECHO"
       );
+      this.setCommentText("Read the Ultrasonic Sensor");
     this.setOutput(true, "Number");
     this.setColour(Blockly.Blocks.ultrasonic.HUE);
     this.setTooltip("Read the Ultrasonic Sensor");

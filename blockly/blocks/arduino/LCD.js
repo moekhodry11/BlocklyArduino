@@ -20,7 +20,6 @@ goog.require("Blockly.Types");
 /** Common HSV hue for all blocks in this category. */
 Blockly.Blocks.lcd.HUE = 50;
 
-
 Blockly.Blocks["lcd_begin"] = {
   /**
    * Block for creating an lcd.begin() function.
@@ -172,21 +171,15 @@ Blockly.Blocks["lcd_begin"] = {
       this.setWarningText(null);
     }
   },
-  updateFields: function() {
-    Blockly.Arduino.Boards.refreshBlockFieldDropdown(
-        this, 'RS', 'digitalPins');
-    Blockly.Arduino.Boards.refreshBlockFieldDropdown(
-        this, 'EN', 'digitalPins');
-    Blockly.Arduino.Boards.refreshBlockFieldDropdown(
-        this, 'D4', 'digitalPins');
-    Blockly.Arduino.Boards.refreshBlockFieldDropdown(
-        this, 'D5', 'digitalPins');
-    Blockly.Arduino.Boards.refreshBlockFieldDropdown(
-        this, 'D6', 'digitalPins');
-    Blockly.Arduino.Boards.refreshBlockFieldDropdown(
-        this, 'D7', 'digitalPins');
+  updateFields: function () {
+    Blockly.Arduino.Boards.refreshBlockFieldDropdown(this, "RS", "digitalPins");
+    Blockly.Arduino.Boards.refreshBlockFieldDropdown(this, "EN", "digitalPins");
+    Blockly.Arduino.Boards.refreshBlockFieldDropdown(this, "D4", "digitalPins");
+    Blockly.Arduino.Boards.refreshBlockFieldDropdown(this, "D5", "digitalPins");
+    Blockly.Arduino.Boards.refreshBlockFieldDropdown(this, "D6", "digitalPins");
+    Blockly.Arduino.Boards.refreshBlockFieldDropdown(this, "D7", "digitalPins");
   },
-  
+
   /**
    * Retrieves the current pin assignments of this LCD block.
    */
@@ -207,10 +200,6 @@ Blockly.Blocks["lcd_begin"] = {
   },
 };
 
-
-
-
-
 Blockly.Blocks["lcd_print"] = {
   /**
    * Block for creating a lcd.print() function.
@@ -228,6 +217,7 @@ Blockly.Blocks["lcd_print"] = {
         new Blockly.FieldDropdown([["1"], ["2"], ["3"], ["4"]]),
         "ID"
       );
+    this.setCommentText("lcd_print");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setTooltip(Blockly.Msg.ARD_LCD_PRINT_TIP);
@@ -236,7 +226,9 @@ Blockly.Blocks["lcd_print"] = {
     this.setWarningText(null);
 
     // Call onchange to initialize warnings and checks
-    Blockly.getMainWorkspace().addChangeListener(this.workspaceChange.bind(this));  
+    Blockly.getMainWorkspace().addChangeListener(
+      this.workspaceChange.bind(this)
+    );
   },
 
   /**
@@ -266,7 +258,9 @@ Blockly.Blocks["lcd_print"] = {
 
     // If no init block is found, issue a warning
     if (!initBlockExists) {
-      warnings.push("Initialize the LCD#" + lcdId + " first using lcd setup block.");
+      warnings.push(
+        "Initialize the LCD#" + lcdId + " first using lcd setup block."
+      );
     }
 
     // Set or clear warning text based on the presence of init block
@@ -277,7 +271,6 @@ Blockly.Blocks["lcd_print"] = {
     }
   },
 };
-
 
 Blockly.Blocks["lcd_set_cursor"] = {
   /**
@@ -300,6 +293,7 @@ Blockly.Blocks["lcd_set_cursor"] = {
         new Blockly.FieldDropdown([["1"], ["2"], ["3"], ["4"]]),
         "ID"
       );
+    this.setCommentText("lcd_set_cursor");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setTooltip(Blockly.Msg.ARD_LCD_SET_CURSOR_TIP);
@@ -308,7 +302,9 @@ Blockly.Blocks["lcd_set_cursor"] = {
     this.setWarningText(null);
 
     // Call onchange to initialize warnings and checks
-    Blockly.getMainWorkspace().addChangeListener(this.workspaceChange.bind(this));
+    Blockly.getMainWorkspace().addChangeListener(
+      this.workspaceChange.bind(this)
+    );
   },
 
   /**
@@ -338,7 +334,9 @@ Blockly.Blocks["lcd_set_cursor"] = {
 
     // If no init block is found, issue a warning
     if (!initBlockExists) {
-      warnings.push("Initialize the LCD#" + lcdId + " first using lcd setup block.");
+      warnings.push(
+        "Initialize the LCD#" + lcdId + " first using lcd setup block."
+      );
     }
 
     // Set or clear warning text based on the presence of init block
@@ -349,8 +347,6 @@ Blockly.Blocks["lcd_set_cursor"] = {
     }
   },
 };
-
-
 Blockly.Blocks["lcd_clear"] = {
   /**
    * Block for creating a lcd.clear() function.
@@ -363,9 +359,15 @@ Blockly.Blocks["lcd_clear"] = {
       .appendField("Clear LCD")
       .appendField("lcd#")
       .appendField(
-        new Blockly.FieldDropdown([["1"], ["2"], ["3"], ["4"]]),
+        new Blockly.FieldDropdown([
+          ["1", "1"],
+          ["2", "2"],
+          ["3", "3"],
+          ["4", "4"],
+        ]),
         "ID"
       );
+    this.setCommentText("lcd_clear");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setTooltip(Blockly.Msg.ARD_LCD_CLEAR_TIP);
@@ -374,7 +376,9 @@ Blockly.Blocks["lcd_clear"] = {
     this.setWarningText(null);
 
     // Call onchange to initialize warnings and checks
-    Blockly.getMainWorkspace().addChangeListener(this.workspaceChange.bind(this));
+    Blockly.getMainWorkspace().addChangeListener(
+      this.workspaceChange.bind(this)
+    );
   },
 
   /**
@@ -404,7 +408,9 @@ Blockly.Blocks["lcd_clear"] = {
 
     // If no init block is found, issue a warning
     if (!initBlockExists) {
-      warnings.push("Initialize the LCD#" + lcdId + " first using lcd setup block.");
+      warnings.push(
+        "Initialize the LCD#" + lcdId + " first using lcd setup block."
+      );
     }
 
     // Set or clear warning text based on the presence of init block
@@ -413,5 +419,20 @@ Blockly.Blocks["lcd_clear"] = {
     } else {
       this.setWarningText(null);
     }
+  },
+};
+
+//comment block
+Blockly.Blocks["lcd_comment"] = {
+  init: function () {
+    this.appendDummyInput().appendField(
+      new Blockly.FieldTextInput("comment"),
+      "comment"
+    );
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+
+    this.setTooltip("");
+    this.setHelpUrl("");
   },
 };
