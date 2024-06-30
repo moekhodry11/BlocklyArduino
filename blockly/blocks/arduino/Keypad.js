@@ -68,26 +68,18 @@ Blockly.Blocks["keypad_setup"] = {
     // Initialize with the default size
     this.updateCols_("4x3");
 
-    // Initialize the warning to null
-    this.setWarningText(null);
+    // Mutation methods
+    this.mutationToDom = function () {
+      var container = document.createElement('mutation');
+      container.setAttribute('keypad_type', this.getFieldValue('KEYPAD_TYPE'));
+      return container;
+    };
 
-    // Initialize debounce timeout
-    this.debounceTimer_ = null;
-
-    // Call onchange to initialize warnings
-    this.onchange();
-  },
-
-  mutationToDom: function () {
-    var container = document.createElement('mutation');
-    container.setAttribute('keypad_type', this.getFieldValue('KEYPAD_TYPE'));
-    return container;
-  },
-
-  domToMutation: function (xmlElement) {
-    var keypadType = xmlElement.getAttribute('keypad_type');
-    this.updateCols_(keypadType);
-    this.setFieldValue(keypadType, 'KEYPAD_TYPE');
+    this.domToMutation = function (xmlElement) {
+      var keypadType = xmlElement.getAttribute('keypad_type');
+      this.updateCols_(keypadType);
+      this.setFieldValue(keypadType, 'KEYPAD_TYPE');
+    };
   },
 
   updateCols_: function (size) {
@@ -105,87 +97,9 @@ Blockly.Blocks["keypad_setup"] = {
         this.removeInput("COLS4");
       }
     }
-  },
-
-  /**
-   * Checks for pin conflicts with other blocks and sets a warning if any are found.
-   * Also checks for local duplicate pin assignments within the block.
-   */
-  checkPinConflicts_: function () {
-    var warnings = [];
-    var currentPins = this.getCurrentPins_();
-
-    // Check against all blocks in the workspace
-    var blocks = Blockly.getMainWorkspace().getAllBlocks();
-    blocks.forEach((block) => {
-      if (block.id !== this.id) {
-        if (block.type === "keypad_setup") {
-          // Check conflicts with other instances of keypad_setup
-          var otherPins = block.getCurrentPins_();
-          var conflicts = currentPins.filter((pin) => otherPins.includes(pin));
-          if (conflicts.length > 0) {
-            warnings.push("Pin conflicts between multiple keypad setups.");
-          }
-        } else if (
-          block.type === "io_digitalwrite" ||
-          block.type === "io_digitalread"
-        ) {
-          // Check conflicts with io_digitalwrite and io_digitalread blocks
-          var pin = block.getFieldValue("PIN");
-          if (currentPins.includes(pin)) {
-            warnings.push(
-              "Pin " + pin + " is used both in keypad and another block."
-            );
-          }
-        }
-      }
-    });
-
-    // Check for local duplicates within the block
-    var duplicates = currentPins.filter((item, index) => currentPins.indexOf(item) != index);
-    if (duplicates.length > 0) {
-      warnings.push("Duplicate pin assignments detected within the block!");
-    }
-
-    if (warnings.length > 0) {
-      // Use debounce to delay warning update after block placement
-      if (this.debounceTimer_) {
-        clearTimeout(this.debounceTimer_);
-      }
-      this.debounceTimer_ = setTimeout(() => {
-        this.setWarningText(warnings.join("\n"));
-      }, 200); // Adjust the delay time as needed (200ms in this example)
-    } else {
-      this.setWarningText(null);
-    }
-  },
-
-  /**
-   * Retrieves the current pin assignments of this keypad_setup block.
-   */
-  getCurrentPins_: function () {
-    var pins = [
-      this.getFieldValue("ROWS1"),
-      this.getFieldValue("ROWS2"),
-      this.getFieldValue("ROWS3"),
-      this.getFieldValue("ROWS4"),
-      this.getFieldValue("COLS1"),
-      this.getFieldValue("COLS2"),
-      this.getFieldValue("COLS3")
-    ];
-    if (this.size == "4x4") {
-      pins.push(this.getFieldValue("COLS4"));
-    }
-    return pins;
-  },
-
-  /**
-   * Handle onchange event to check for pin conflicts and local duplicates.
-   */
-  onchange: function () {
-    this.checkPinConflicts_();
   }
 };
+
 
 Blockly.Blocks["keypad_get_key"] = {
   init: function () {

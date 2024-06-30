@@ -53,6 +53,7 @@ Blockly.Arduino['servo_write'] = function(block) {
  * @param {!Blockly.Block} block Block to generate the code from.
  * @return {array} Completed code with order of operation.
  */
+
 Blockly.Arduino['servo_read'] = function(block) {
   var pinKey = block.getFieldValue('SERVO_PIN');
   var servoName = 'myServo' + pinKey;
@@ -68,4 +69,23 @@ Blockly.Arduino['servo_read'] = function(block) {
 
   var code = servoName + '.read()';
   return [code, Blockly.Arduino.ORDER_ATOMIC];
+};
+
+// Custom validation logic to check for servo_write block presence
+Blockly.Blocks['servo_read'].onchange = function(event) {
+  var workspace = Blockly.getMainWorkspace();
+  var blocks = workspace.getAllBlocks();
+  var foundServoWrite = false;
+
+  blocks.forEach((block) => {
+    if (block.type === 'servo_write') {
+      foundServoWrite = true;
+    }
+  });
+
+  if (!foundServoWrite) {
+    this.setWarningText('Warning: A servo_write block is required when using a servo_read block.');
+  } else {
+    this.setWarningText(null);
+  }
 };
