@@ -130,8 +130,10 @@ Ardublockly.TOOLBOX_XML =
   '    <block type="variables_set_type"></block>' +
   "  </category>" +
   "  <sep></sep>" +
+  //make one category called it Interce
+
+  '  <category id="catInteface" name="Inteface">' +
   //LCD
-  '  <category id="catLCD" name="LCD">' +
   '    <block type="lcd_begin">' +
   '      <field name="ID">1</field>' +
   '      <field name="LCDTYPE">standard</field>' +
@@ -166,11 +168,8 @@ Ardublockly.TOOLBOX_XML =
   '    <block type="lcd_clear">' +
   '      <field name="ID">1</field>' +
   "    </block>" +
-  "  </category>" +
-  "  <sep></sep>" +
   //Keypad
 
-  '  <category id="catKeypad" name="Keypad">' +
   '    <block type="keypad_setup">' +
   '      <field name="ID">1</field>' +
   '      <field name="KEYPAD_TYPE">4x3</field>' +
@@ -186,11 +185,8 @@ Ardublockly.TOOLBOX_XML =
   '    <block type="keypad_get_key">' +
   '      <field name="ID">1</field>' +
   "    </block>" +
-  "  </category>" +
-  "  <sep></sep>" +
   //SD Card
 
-  '  <category id="catSDCard" name="SD Card">' +
   '    <block type="sdcard_setup">' +
   '      <field name="CS">4</field>' +
   "    </block>" +
@@ -206,11 +202,8 @@ Ardublockly.TOOLBOX_XML =
   "    </block>" +
   '    <block type="sdcard_read"></block>' +
   '    <block type="sdcard_close"></block>' +
-  "  </category>" +
-  "  <sep></sep>" +
   //ultrasonic
 
-  '  <category id="catUltrasonic" name="Ultrasonic">' +
   '    <block type="ultrasonic_setup">' +
   '      <field name="TRIG">0</field>' +
   '      <field name="ECHO">1</field>' +
@@ -219,31 +212,18 @@ Ardublockly.TOOLBOX_XML =
   '      <field name="TRIG">0</field>' +
   '      <field name="ECHO">1</field>' +
   "    </block>" +
-  "  </category>" +
-  "  <sep></sep>" +
   //tmp36
 
-  '  <category id="catTMP36" name="TMP36">' +
   '    <block type="tmp36_read">' +
   '      <field name="PIN">A0</field>' +
   "    </block>" +
-  "  </category>" +
-  "  <sep></sep>" +
   //ldr
-
-  '  <category id="catLDR" name="LDR">' +
-  '    <block type="ldr_setup">' +
-  '      <field name="ID">1</field>' +
+  '    <block type="ldr_read">' +
   '      <field name="PIN">A0</field>' +
   "    </block>" +
-  '    <block type="ldr_read">' +
-  '      <field name="ID">1</field>' +
-  "    </block>" +
-  "  </category>" +
-  "  <sep></sep>" +
+
   //oled
 
-  '  <category id="catOLED" name="OLED">' +
   '    <block type="oled_i2c_begin">' +
   '      <field name="ID">1</field>' +
   '      <field name="WIDTH">128</field>' +
@@ -297,6 +277,7 @@ Ardublockly.TOOLBOX_XML =
   "    </block>" +
   "  </category>" +
   "  <sep></sep>" +
+  //end of new catageries
   '  <category id="catInputOutput" name="Input/Output">' +
   '    <block type="io_digitalwrite">' +
   '      <value name="STATE">' +

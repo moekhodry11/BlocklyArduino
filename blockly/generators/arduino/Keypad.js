@@ -15,6 +15,28 @@ Blockly.Arduino['keypad_setup'] = function(block) {
     var cols2 = block.getFieldValue('COLS2');
     var cols3 = block.getFieldValue('COLS3');
     var cols4 = block.getFieldValue('COLS4');
+    
+    Blockly.Arduino.reservePin(
+        block, rows1, Blockly.Arduino.PinTypes.OUTPUT, 'Digital Write');
+        Blockly.Arduino.reservePin(
+            block, rows2, Blockly.Arduino.PinTypes.OUTPUT, 'Digital Write');
+            Blockly.Arduino.reservePin(
+                block, rows3, Blockly.Arduino.PinTypes.OUTPUT, 'Digital Write');
+                Blockly.Arduino.reservePin(
+                    block, rows4, Blockly.Arduino.PinTypes.OUTPUT, 'Digital Write');
+
+
+                    Blockly.Arduino.reservePin(
+                        block, cols1, Blockly.Arduino.PinTypes.INPUT, 'Digital Read');
+                        Blockly.Arduino.reservePin(
+                            block, cols2, Blockly.Arduino.PinTypes.INPUT, 'Digital Read');
+                            Blockly.Arduino.reservePin(
+                                block, cols3, Blockly.Arduino.PinTypes.INPUT, 'Digital Read');
+                                Blockly.Arduino.reservePin(
+                                    block, cols4, Blockly.Arduino.PinTypes.INPUT, 'Digital Read');
+
+
+                                    
     Blockly.Arduino.addInclude('keypad', '#include <Keypad.h>');
     if(keypadType == '4x4'){
 

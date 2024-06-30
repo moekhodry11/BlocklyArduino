@@ -4,8 +4,6 @@ goog.require("Blockly.Blocks");
 goog.require("Blockly.Types");
 
 Blockly.Blocks.ultrasonic.HUE = 150;
-
-
 Blockly.Blocks["ultrasonic_setup"] = {
   init: function () {
     this.appendDummyInput()
@@ -21,66 +19,30 @@ Blockly.Blocks["ultrasonic_setup"] = {
         "ECHO"
       );
     this.setPreviousStatement(true, null);
+    this.setInputsInline(false);
     this.setNextStatement(true, null);
     this.setColour(Blockly.Blocks.ultrasonic.HUE);
     this.setTooltip("Setup the Ultrasonic Sensor");
     this.setHelpUrl("");
 
-    // Call onchange to initialize warnings and pin updates
-    this.onchange();
+
+   
   },
 
-  /**
-   * Called whenever the block's fields change.
-   * Checks for pin conflicts with other blocks and local duplicate pin assignments within the block.
-   */
-  onchange: function () {
-    var trigPin = this.getFieldValue("TRIG");
-    var echoPin = this.getFieldValue("ECHO");
-    this.checkPinConflictsAndUpdatePins_(trigPin, echoPin);
+  updateFields: function () {
+    Blockly.Arduino.Boards.refreshBlockFieldDropdown(
+      this,
+      "TRIG",
+      "digitalPins"
+    );
+    Blockly.Arduino.Boards.refreshBlockFieldDropdown(
+      this,
+      "ECHO",
+      "digitalPins"
+    );
   },
 
-  /**
-   * Checks for pin conflicts with other blocks and sets a warning if any are found.
-   * Updates the pin fields.
-   * @param {string} trigPin - The selected trigger pin.
-   * @param {string} echoPin - The selected echo pin.
-   */
-  checkPinConflictsAndUpdatePins_: function (trigPin, echoPin) {
-    var warnings = [];
-
-    // Check for local duplicate pin assignments within the block
-    if (trigPin === echoPin) {
-      warnings.push("Trigger pin and echo pin must be different!");
-    }
-
-    // Check against all blocks in the workspace for conflicts
-    var blocks = Blockly.getMainWorkspace().getAllBlocks();
-    blocks.forEach((block) => {
-      if (block.id !== this.id) {
-        if (
-          block.type === "ultrasonic_setup" ||
-          block.type === "ultrasonic_read"
-        ) {
-          // Check conflicts with other instances of ultrasonic_setup or ultrasonic_read
-          var otherTrigPin = block.getFieldValue("TRIG");
-          var otherEchoPin = block.getFieldValue("ECHO");
-          if (trigPin === otherTrigPin || echoPin === otherEchoPin) {
-            warnings.push("Pin conflict with another Ultrasonic block!");
-          }
-        }
-      }
-    });
-
-    // Set warning text if conflicts or duplicates are found
-    if (warnings.length > 0) {
-      this.setWarningText(warnings.join("\n"));
-    } else {
-      this.setWarningText(null);
-    }
-  },
 };
-
 
 Blockly.Blocks["ultrasonic_read"] = {
   init: function () {
@@ -101,51 +63,58 @@ Blockly.Blocks["ultrasonic_read"] = {
     this.setTooltip("Read the Ultrasonic Sensor");
     this.setHelpUrl("");
 
-    // Call onchange to initialize warnings and pin updates
-    this.onchange();
+    Blockly.getMainWorkspace().addChangeListener(this.workspaceChange.bind(this));
   },
 
   /**
    * Called whenever the block's fields change.
    * Checks for pin conflicts with other blocks and local duplicate pin assignments within the block.
    */
-  onchange: function () {
+  workspaceChange: function () {
     var trigPin = this.getFieldValue("TRIG");
     var echoPin = this.getFieldValue("ECHO");
-    this.checkPinConflictsAndUpdatePins_(trigPin, echoPin);
+    this.checkInitBlockPresenceAndPinConflicts_(trigPin, echoPin);
   },
 
   /**
-   * Checks for pin conflicts with other blocks and sets a warning if any are found.
-   * Updates the pin fields.
+   * Checks if the init block for the ultrasonic sensor has been used and for pin conflicts.
+   * Sets a warning if any issues are found.
    * @param {string} trigPin - The selected trigger pin.
    * @param {string} echoPin - The selected echo pin.
    */
-  checkPinConflictsAndUpdatePins_: function (trigPin, echoPin) {
+  checkInitBlockPresenceAndPinConflicts_: function (trigPin, echoPin) {
     var warnings = [];
+
+    // Check if there is an ultrasonic_setup block with the same trigger and echo pins
+    var initBlockExists = false;
+    var blocks = Blockly.getMainWorkspace().getAllBlocks();
+    blocks.forEach((block) => {
+      if (
+        block.type === "ultrasonic_setup" &&
+        block.getFieldValue("TRIG") === trigPin &&
+        block.getFieldValue("ECHO") === echoPin
+      ) {
+        initBlockExists = true;
+      }
+    });
+
+    // If no init block is found, issue a warning
+    if (!initBlockExists) {
+      warnings.push(
+        "Initialize the Ultrasonic Sensor with trigger pin " +
+          trigPin +
+          " and echo pin " +
+          echoPin +
+          " first using ultrasonic setup block."
+      );
+    }
 
     // Check for local duplicate pin assignments within the block
     if (trigPin === echoPin) {
       warnings.push("Trigger pin and echo pin must be different!");
     }
 
-    // Check against all blocks in the workspace for conflicts
-    var blocks = Blockly.getMainWorkspace().getAllBlocks();
-    blocks.forEach((block) => {
-      if (block.id !== this.id) {
-        if (
-          block.type === "ultrasonic_setup" ||
-          block.type === "ultrasonic_read"
-        ) {
-          // Check conflicts with other instances of ultrasonic_setup or ultrasonic_read
-          var otherTrigPin = block.getFieldValue("TRIG");
-          var otherEchoPin = block.getFieldValue("ECHO");
-          if (trigPin === otherTrigPin || echoPin === otherEchoPin) {
-            warnings.push("Pin conflict with another Ultrasonic block!");
-          }
-        }
-      }
-    });
+
 
     // Set warning text if conflicts or duplicates are found
     if (warnings.length > 0) {
@@ -154,13 +123,12 @@ Blockly.Blocks["ultrasonic_read"] = {
       this.setWarningText(null);
     }
   },
-  
+
   /**
    * Returns the type of output value for this block.
    * @returns {string} The type name of the output value.
    */
   getBlockType: function () {
-    return Blockly.Types.NUMBER;
+    return Blockly.Types.DECIMAL;
   },
 };
-
