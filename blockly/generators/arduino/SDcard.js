@@ -28,6 +28,10 @@ Blockly.Arduino['sdcard_setup'] = function(block) {
     /* get the dropdown value */
     var cs = block.getFieldValue('CS');
 
+    //reserve pin 10 and cs
+    Blockly.Arduino.reservePin(block, 10, Blockly.Arduino.PinTypes.OUTPUT, 'Digital Write');
+    Blockly.Arduino.reservePin(block, cs, Blockly.Arduino.PinTypes.INPUT, 'Digital Read');
+
     Blockly.Arduino.addInclude('sdcard', '#include <SD.h>\n#include <SPI.h>');
 
     Blockly.Arduino.addDeclaration('sdcard', 'File myFile;');

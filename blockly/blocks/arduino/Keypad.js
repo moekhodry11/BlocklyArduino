@@ -68,8 +68,14 @@ Blockly.Blocks["keypad_setup"] = {
     // Initialize with the default size
     this.updateCols_("4x3");
 
-    // Check for pin conflicts and set initial warnings
-    this.checkPinConflicts_();
+    // Initialize the warning to null
+    this.setWarningText(null);
+
+    // Initialize debounce timeout
+    this.debounceTimer_ = null;
+
+    // Call onchange to initialize warnings
+    this.onchange();
   },
 
   mutationToDom: function () {
@@ -142,7 +148,13 @@ Blockly.Blocks["keypad_setup"] = {
     }
 
     if (warnings.length > 0) {
-      this.setWarningText(warnings.join("\n"));
+      // Use debounce to delay warning update after block placement
+      if (this.debounceTimer_) {
+        clearTimeout(this.debounceTimer_);
+      }
+      this.debounceTimer_ = setTimeout(() => {
+        this.setWarningText(warnings.join("\n"));
+      }, 200); // Adjust the delay time as needed (200ms in this example)
     } else {
       this.setWarningText(null);
     }
@@ -159,8 +171,7 @@ Blockly.Blocks["keypad_setup"] = {
       this.getFieldValue("ROWS4"),
       this.getFieldValue("COLS1"),
       this.getFieldValue("COLS2"),
-      this.getFieldValue("COLS3"),
-      this.getFieldValue("COLS4")
+      this.getFieldValue("COLS3")
     ];
     if (this.size == "4x4") {
       pins.push(this.getFieldValue("COLS4"));
@@ -192,14 +203,14 @@ Blockly.Blocks["keypad_get_key"] = {
     this.setWarningText(null);
 
     // Call onchange to initialize warnings and checks
-    this.onchange();
+    Blockly.getMainWorkspace().addChangeListener(this.workspaceChange.bind(this));  
   },
 
   /**
    * Called whenever the block's fields change.
    * Checks if the init block for this keypad# has been dragged before using this block.
    */
-  onchange: function () {
+  workspaceChange: function () {
     var keypadId = this.getFieldValue("ID");
     this.checkInitBlockPresence_(keypadId);
   },

@@ -172,7 +172,21 @@ Blockly.Blocks["lcd_begin"] = {
       this.setWarningText(null);
     }
   },
-
+  updateFields: function() {
+    Blockly.Arduino.Boards.refreshBlockFieldDropdown(
+        this, 'RS', 'digitalPins');
+    Blockly.Arduino.Boards.refreshBlockFieldDropdown(
+        this, 'EN', 'digitalPins');
+    Blockly.Arduino.Boards.refreshBlockFieldDropdown(
+        this, 'D4', 'digitalPins');
+    Blockly.Arduino.Boards.refreshBlockFieldDropdown(
+        this, 'D5', 'digitalPins');
+    Blockly.Arduino.Boards.refreshBlockFieldDropdown(
+        this, 'D6', 'digitalPins');
+    Blockly.Arduino.Boards.refreshBlockFieldDropdown(
+        this, 'D7', 'digitalPins');
+  },
+  
   /**
    * Retrieves the current pin assignments of this LCD block.
    */
@@ -222,14 +236,14 @@ Blockly.Blocks["lcd_print"] = {
     this.setWarningText(null);
 
     // Call onchange to initialize warnings and checks
-    this.onchange();
+    Blockly.getMainWorkspace().addChangeListener(this.workspaceChange.bind(this));  
   },
 
   /**
    * Called whenever the block's fields change.
    * Checks if the init block for this lcd# has been dragged before using this block.
    */
-  onchange: function () {
+  workspaceChange: function () {
     var lcdId = this.getFieldValue("ID");
     this.checkInitBlockPresence_(lcdId);
   },
@@ -294,14 +308,14 @@ Blockly.Blocks["lcd_set_cursor"] = {
     this.setWarningText(null);
 
     // Call onchange to initialize warnings and checks
-    this.onchange();
+    Blockly.getMainWorkspace().addChangeListener(this.workspaceChange.bind(this));
   },
 
   /**
    * Called whenever the block's fields change.
    * Checks if the init block for this lcd# has been dragged before using this block.
    */
-  onchange: function () {
+  workspaceChange: function () {
     var lcdId = this.getFieldValue("ID");
     this.checkInitBlockPresence_(lcdId);
   },
@@ -360,14 +374,14 @@ Blockly.Blocks["lcd_clear"] = {
     this.setWarningText(null);
 
     // Call onchange to initialize warnings and checks
-    this.onchange();
+    Blockly.getMainWorkspace().addChangeListener(this.workspaceChange.bind(this));
   },
 
   /**
    * Called whenever the block's fields change.
    * Checks if the init block for this lcd# has been dragged before using this block.
    */
-  onchange: function () {
+  workspaceChange: function () {
     var lcdId = this.getFieldValue("ID");
     this.checkInitBlockPresence_(lcdId);
   },

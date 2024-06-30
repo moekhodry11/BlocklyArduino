@@ -42,6 +42,19 @@ Blockly.Arduino['lcd_begin'] = function(block) {
       d5 = block.getFieldValue('D5');
       d6 = block.getFieldValue('D6');
       d7 = block.getFieldValue('D7');
+      Blockly.Arduino.reservePin(
+        block, rs, Blockly.Arduino.PinTypes.OUTPUT, 'Digital Write');
+        Blockly.Arduino.reservePin(
+          block, en, Blockly.Arduino.PinTypes.OUTPUT, 'Digital Write');
+          Blockly.Arduino.reservePin(
+            block, d4, Blockly.Arduino.PinTypes.OUTPUT, 'Digital Write');
+            Blockly.Arduino.reservePin(
+              block, d5, Blockly.Arduino.PinTypes.OUTPUT, 'Digital Write');
+              Blockly.Arduino.reservePin(
+                block, d6, Blockly.Arduino.PinTypes.OUTPUT, 'Digital Write');
+                Blockly.Arduino.reservePin(
+                  block, d7, Blockly.Arduino.PinTypes.OUTPUT, 'Digital Write');
+
       
       Blockly.Arduino.addInclude('lcd', '#include <LiquidCrystal.h>');
       Blockly.Arduino.addDeclaration('lcd_' + id, 'LiquidCrystal lcd_' + id + '(' + rs + ',' + en + ',' + d4 + ',' + d5 + ',' + d6 + ',' + d7 + ');');
@@ -54,6 +67,10 @@ Blockly.Arduino['lcd_begin'] = function(block) {
       Blockly.Arduino.addDeclaration('lcd_' + id, 'LiquidCrystal_I2C lcd_' + id + '(' + i2cAddress + ',' + lcdsize + ');');
       Blockly.Arduino.setups_['setup_lcd_' + id] = 'lcd_' + id + '.init();\nlcd_' + id + '.backlight();';
   }
+
+  
+  Blockly.Arduino.reservePin(
+    block, rs, Blockly.Arduino.PinTypes.OUTPUT, 'Digital Write');
 
   return '';
 };
