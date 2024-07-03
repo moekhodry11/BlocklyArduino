@@ -58,7 +58,9 @@ Blockly.Blocks["keypad_setup"] = {
       .appendField(
         new Blockly.FieldDropdown(Blockly.Arduino.Boards.selected.digitalPins),
         "COLS3"
-      );
+      )
+      ;
+
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(Blockly.Blocks.keypad.HUE);

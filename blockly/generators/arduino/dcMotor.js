@@ -44,7 +44,8 @@ pinMode(MOTOR${motorNumber}_ENA, OUTPUT);
 Blockly.Arduino["control_motor"] = function (block) {
   var motorNumber = block.getFieldValue("MOTOR_NUMBER");
   var direction = block.getFieldValue("DIRECTION");
-  var speed = block.getFieldValue("SPEED");
+  var speed = Blockly.Arduino.valueToCode(block, 'SPEED', Blockly.Arduino.ORDER_ATOMIC) || '0';;
+
 
   // Check if setup_motor block exists before control_motor
   var setupBlocks = Blockly.getMainWorkspace().getAllBlocks().filter(function (block) {

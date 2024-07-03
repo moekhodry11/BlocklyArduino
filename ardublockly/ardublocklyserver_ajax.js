@@ -144,9 +144,9 @@ ArdublocklyServer.jsonToIdeModal = function(jsonObj) {
     elErrOp.innerHTML += '<br />' + errStr.join('<br />');
   } else if (jsonObj.success && jsonObj.ide_mode) {
     // Format a successful response
-    if (jsonObj.ide_mode == 'upload') {
+    if (jsonObj.ide_mode == 'upload' && jsonObj.ide_data.err_output.includes('.ino') == false) {
       elTitle.innerHTML = Ardublockly.getLocalStr('arduinoOpUploadedTitle');
-    } else if (jsonObj.ide_mode == 'verify') {
+    } else if (jsonObj.ide_mode == 'verify' && jsonObj.ide_data.err_output.includes('.ino') == false) {
       elTitle.innerHTML = Ardublockly.getLocalStr('arduinoOpVerifiedTitle');
     } else if (jsonObj.ide_mode == 'open') {
       elTitle.innerHTML = Ardublockly.getLocalStr('arduinoOpOpenedTitle');
@@ -155,6 +155,7 @@ ArdublocklyServer.jsonToIdeModal = function(jsonObj) {
     } else {
       elTitle.innerHTML = Ardublockly.getLocalStr('arduinoOpErrorTitle');
     }
+
   } else {
     console.error(jsonObj);
     console.error('Unexpected response format, printed above.');

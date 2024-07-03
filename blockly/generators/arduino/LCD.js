@@ -35,7 +35,7 @@ Blockly.Arduino['lcd_begin'] = function(block) {
       
   var rs, en, d4, d5, d6, d7;
 
-  if (lcdtype === 'standard') {
+  if (lcdtype === 'standard' && Blockly.Arduino.definitions_['lcd_' + id] == undefined) {
       rs = block.getFieldValue('RS');
       en = block.getFieldValue('EN');
       d4 = block.getFieldValue('D4');
@@ -59,7 +59,7 @@ Blockly.Arduino['lcd_begin'] = function(block) {
       Blockly.Arduino.addInclude('lcd', '#include <LiquidCrystal.h>');
       Blockly.Arduino.addDeclaration('lcd_' + id, 'LiquidCrystal lcd_' + id + '(' + rs + ',' + en + ',' + d4 + ',' + d5 + ',' + d6 + ',' + d7 + ');');
       Blockly.Arduino.addSetup('lcd_' + id, 'lcd_' + id + '.begin(' + lcdsize + ');', false);
-  } else if (lcdtype === 'i2c') {
+  } else if (lcdtype === 'i2c' && Blockly.Arduino.definitions_['lcd_' + id] == undefined) {
       var i2cAddress = block.getFieldValue('I2C_ADDRESS');
       
       Blockly.Arduino.addInclude('wire', '#include <Wire.h>');
@@ -92,14 +92,5 @@ Blockly.Arduino['lcd_set_cursor'] = function(block) {
 Blockly.Arduino['lcd_clear'] = function(block) {
   var id = block.getFieldValue('ID');
   var code = 'lcd_'+id+'.clear();\n';
-  return code;
-}
-
-
-//comment block
-
-Blockly.Arduino['lcd_comment'] = function(block) {
-  var comment = block.getFieldValue('comment');
-  var code = '// ' + comment + '\n';
   return code;
 }

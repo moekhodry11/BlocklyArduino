@@ -421,18 +421,3 @@ Blockly.Blocks["lcd_clear"] = {
     }
   },
 };
-
-//comment block
-Blockly.Blocks["lcd_comment"] = {
-  init: function () {
-    this.appendDummyInput().appendField(
-      new Blockly.FieldTextInput("comment"),
-      "comment"
-    );
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, null);
-
-    this.setTooltip("");
-    this.setHelpUrl("");
-  },
-};
