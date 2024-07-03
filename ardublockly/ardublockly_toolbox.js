@@ -132,13 +132,7 @@ Ardublockly.TOOLBOX_XML =
   "  <sep></sep>" +
   //make one category called it Interce
 
-  '  <category id="catInteface" name="Inteface">' +
-   //comment block
-   '    <block type="lcd_comment">' +
-   '      <value name="TEXT">' +
-   '        <block type="text"></block>' +
-   "      </value>" +
-   "    </block>" +
+  '  <category id="catInterface" name="Interface">' +
   //LCD
   '    <block type="lcd_begin">' +
   '      <field name="ID">1</field>' +
@@ -174,9 +168,6 @@ Ardublockly.TOOLBOX_XML =
   '    <block type="lcd_clear">' +
   '      <field name="ID">1</field>' +
   "    </block>" +
- 
-
-
   //Keypad
 
   '    <block type="keypad_setup">' +
@@ -189,7 +180,6 @@ Ardublockly.TOOLBOX_XML =
   '      <field name="COLS1">4</field>' +
   '      <field name="COLS2">5</field>' +
   '      <field name="COLS3">6</field>' +
-  '      <field name="COLS4">7</field>' +
   "    </block>" +
   '    <block type="keypad_get_key">' +
   '      <field name="ID">1</field>' +
@@ -373,17 +363,10 @@ Ardublockly.TOOLBOX_XML =
   '      <field name="MOTOR_NUMBER">1</field>' +
   '      <value name="SPEED">' +
   '        <block type="math_number">' +
-  '          <field name="NUM">150</field>' +
+  '          <field name="NUM"></field>' +
   "        </block>" +
   "      </value>" +
   "    </block>" +
-  
-  
-  
-
-
-
-
   '    <block type="stepper_config">' +
   '      <field name="STEPPER_NUMBER_OF_PINS">2</field>' +
   '      <field name="STEPPER_PIN1">1</field>' +

@@ -45,8 +45,16 @@ Blockly.Blocks['control_motor'] = {
         .appendField(new Blockly.FieldDropdown([["1"], ["2"], ["3"], ["4"]]),"MOTOR_NUMBER")
         .appendField("Direction")
         .appendField(new Blockly.FieldDropdown([["Forward","FORWARD"], ["Backward","BACKWARD"]]), "DIRECTION")
+
+
+        this.appendValueInput("SPEED")
         .appendField("Speed")
-        .appendField(new Blockly.FieldNumber(150, 0, 255), "SPEED");
+        .setCheck(Blockly.Types.NUMBER.checkList);
+
+        // .appendField("Speed")
+        // .appendField(new Blockly.FieldNumber(150, 0, 255), "SPEED");
+      //make it inline
+    this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(230);

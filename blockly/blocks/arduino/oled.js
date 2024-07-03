@@ -153,18 +153,14 @@ Blockly.Blocks['oled_set_cursor'] = {
   init: function() {
     this.setHelpUrl('https://sensorkit.arduino.cc/sensorkit/module/lessons/lesson/10-the-oled-screen');
     this.setColour(Blockly.Blocks.oled.HUE);
+    this.appendValueInput("COL")
+      .appendField("Set Cursor")
+      .appendField("Col")
+      .setCheck(Blockly.Types.NUMBER.checkList);
+    this.appendValueInput("ROW")
+      .appendField("Row")
+      .setCheck(Blockly.Types.NUMBER.checkList);
     this.appendDummyInput()
-      .appendField("Set cursor position")
-      .appendField("column")
-      .appendField(
-        new Blockly.FieldNumber(0, 0),
-        "COL"
-      )
-      .appendField("row")
-      .appendField(
-        new Blockly.FieldNumber(0, 0),
-        "ROW"
-      )
       .appendField("on OLED #")
       .appendField(
         new Blockly.FieldDropdown([["1"], ["2"], ["3"], ["4"]]),
@@ -423,18 +419,14 @@ Blockly.Blocks['oled_draw_pixel'] = {
   init: function() {
     this.setHelpUrl('https://sensorkit.arduino.cc/sensorkit/module/lessons/lesson/10-the-oled-screen');
     this.setColour(Blockly.Blocks.oled.HUE);
-    this.appendDummyInput()
-      .appendField("Draw pixel at")
-      .appendField("X:")
-      .appendField(
-        new Blockly.FieldNumber(0, 0, Infinity, 1),
-        "X"
-      )
-      .appendField("Y:")
-      .appendField(
-        new Blockly.FieldNumber(0, 0, Infinity, 1),
-        "Y"
-      )
+    this.appendValueInput("X")
+    .appendField("Draw Pixel at")
+    .appendField("X")
+    .setCheck(Blockly.Types.NUMBER.checkList);
+  this.appendValueInput("Y")
+    .appendField("Y")
+    .setCheck(Blockly.Types.NUMBER.checkList);
+  this.appendDummyInput()
       .appendField("Color:")
       .appendField(
         new Blockly.FieldDropdown([["White"], ["Black"], ["Invert"]]),

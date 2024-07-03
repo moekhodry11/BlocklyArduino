@@ -31,8 +31,10 @@ Blockly.Arduino['oled_print_text'] = function(block) {
 
 Blockly.Arduino['oled_set_cursor'] = function(block) {
   var id = block.getFieldValue('ID');
-  var col = block.getFieldValue('COL');
-  var row = block.getFieldValue('ROW');
+
+
+  var col = Blockly.Arduino.valueToCode(block, 'COL', Blockly.Arduino.ORDER_ATOMIC) || '0';
+  var row = Blockly.Arduino.valueToCode(block, 'ROW', Blockly.Arduino.ORDER_ATOMIC) || '0';
 
   return 'display_' + id + '.setCursor(' + col + ', ' + row + ');\n';
 };
@@ -77,8 +79,9 @@ Blockly.Arduino['oled_set_text_color'] = function(block) {
 
 Blockly.Arduino['oled_draw_pixel'] = function(block) {
   var id = block.getFieldValue('ID');
-  var x = block.getFieldValue('X');
-  var y = block.getFieldValue('Y');
+  var x = Blockly.Arduino.valueToCode(block, 'X', Blockly.Arduino.ORDER_ATOMIC) || '0';
+  var y = Blockly.Arduino.valueToCode(block, 'Y', Blockly.Arduino.ORDER_ATOMIC) || '0';
+
   var color = block.getFieldValue('COLOR');
 
   var colorCode;
