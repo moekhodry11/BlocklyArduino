@@ -3,7 +3,7 @@ goog.provide("Blockly.Blocks.dcMotor");
 goog.require("Blockly.Blocks");
 goog.require("Blockly.Types");
 
-Blockly.Blocks.ultrasonic.HUE = 150;
+Blockly.Blocks.dcMotor.HUE = 40;
 
 Blockly.Blocks['setup_motor'] = {
   init: function() {
@@ -22,7 +22,7 @@ Blockly.Blocks['setup_motor'] = {
         
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(230);
+    this.setColour(Blockly.Blocks.dcMotor.HUE);
     this.setTooltip("");
     this.setHelpUrl("");
   },
@@ -57,7 +57,7 @@ Blockly.Blocks['control_motor'] = {
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(230);
+    this.setColour(Blockly.Blocks.dcMotor.HUE);
     this.setTooltip("");
     this.setHelpUrl("");
   }

@@ -5,7 +5,7 @@ goog.provide("Blockly.Blocks.oled");
 goog.require("Blockly.Blocks");
 goog.require("Blockly.Types");
 
-Blockly.Blocks.oled.HUE = 100;
+Blockly.Blocks.oled.HUE = 120;
 Blockly.Blocks["oled_i2c_begin"] = {
   init: function () {
     this.setHelpUrl("https://sensorkit.arduino.cc/sensorkit/module/lessons/lesson/10-the-oled-screen");
@@ -96,7 +96,7 @@ Blockly.Blocks["oled_print_text"] = {
         "ID"
       );
 
-    this.setCommentText("oled_print_text");
+   // this.setCommentText("oled_print_text");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setTooltip(Blockly.Msg.ARD_OLED_PRINT_TEXT_TIP);
@@ -166,7 +166,7 @@ Blockly.Blocks['oled_set_cursor'] = {
         new Blockly.FieldDropdown([["1"], ["2"], ["3"], ["4"]]),
         "ID"
       );
-      this.setCommentText("oled_set_cursor");
+    //  this.setCommentText("oled_set_cursor");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setTooltip(Blockly.Msg.ARD_OLED_SET_CURSOR_TIP);
@@ -229,7 +229,7 @@ Blockly.Blocks['oled_clear'] = {
         new Blockly.FieldDropdown([["1"], ["2"], ["3"], ["4"]]),
         "ID"
       );
-    this.setCommentText("oled_clear");
+    // this.setCommentText("oled_clear");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setTooltip(Blockly.Msg.ARD_OLED_CLEAR_TIP);
@@ -297,7 +297,7 @@ Blockly.Blocks['oled_set_text_size'] = {
         new Blockly.FieldDropdown([["1"], ["2"], ["3"], ["4"]]),
         "ID"
       );
-    this.setCommentText("oled_set_text_size");
+    // this.setCommentText("oled_set_text_size");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setTooltip(Blockly.Msg.ARD_OLED_SET_TEXT_SIZE_TIP);
@@ -364,7 +364,7 @@ Blockly.Blocks['oled_set_text_color'] = {
         new Blockly.FieldDropdown([["1"], ["2"], ["3"], ["4"]]),
         "ID"
       );
-      this.setCommentText("oled_set_text_color");
+      // this.setCommentText("oled_set_text_color");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setTooltip(Blockly.Msg.ARD_OLED_SET_TEXT_COLOR_TIP);
@@ -437,7 +437,7 @@ Blockly.Blocks['oled_draw_pixel'] = {
         new Blockly.FieldDropdown([["1"], ["2"], ["3"], ["4"]]),
         "ID"
       );
-      this.setCommentText("oled_draw_pixel");
+      // this.setCommentText("oled_draw_pixel");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setTooltip(Blockly.Msg.ARD_OLED_DRAW_PIXEL_TIP);

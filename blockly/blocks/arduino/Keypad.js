@@ -5,7 +5,7 @@ goog.provide("Blockly.Blocks.keypad");
 goog.require("Blockly.Blocks");
 goog.require("Blockly.Types");
 
-Blockly.Blocks.keypad.HUE = 0;
+Blockly.Blocks.keypad.HUE = 380;
 Blockly.Blocks["keypad_setup"] = {
   init: function () {
     this.setHelpUrl("https://www.arduino.cc/reference/en/libraries/keypad/");
@@ -169,7 +169,7 @@ Blockly.Blocks["keypad_get_key"] = {
         new Blockly.FieldDropdown([["1"], ["2"], ["3"], ["4"]]),
         "ID"
       );
-    this.setCommentText("keypad_get_key");
+   // this.setCommentText("keypad_get_key");
     this.setOutput(true, "String");
     this.setColour(Blockly.Blocks.keypad.HUE);
     this.setTooltip(Blockly.Msg.ARD_KEYPAD_GET_KEY_TIP);

@@ -226,13 +226,11 @@ Ardublockly.updateToolboxLanguage = function () {
     "catFunctions",
     "catInputOutput",
     "catTime",
-    "catGrove",
     "catAudio",
     "catMotors",
     "catComms",
     "catSensors",
     "catDisplays",
-    "catSDCard",
   ];
   var categoryNodes = Ardublockly.xmlTree.getElementsByTagName("category");
   for (var i = 0, cat; (cat = categoryNodes[i]); i++) {

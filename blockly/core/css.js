@@ -288,7 +288,7 @@ Blockly.Css.CONTENT = [
   '}',
 
   '.blocklyCommentTextarea {',
-    'background-color: #ffc;',
+    'background-color: #dceff8;',
     'border: 0;',
     'margin: 0;',
     'padding: 2px;',
@@ -497,6 +497,7 @@ Blockly.Css.CONTENT = [
     'font-size: 16px;',
     'padding: 0 3px;',
     'vertical-align: middle;',
+    'color:#555555',
   '}',
 
   '.blocklyTreeSelected .blocklyTreeLabel {',

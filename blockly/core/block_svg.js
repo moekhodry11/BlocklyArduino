@@ -683,44 +683,44 @@ Blockly.BlockSvg.prototype.showContextMenu_ = function(e) {
       menuOptions.push(commentOption);
     }
 
-    // Option to make block inline.
-    if (!this.collapsed_) {
-      for (var i = 1; i < this.inputList.length; i++) {
-        if (this.inputList[i - 1].type != Blockly.NEXT_STATEMENT &&
-            this.inputList[i].type != Blockly.NEXT_STATEMENT) {
-          // Only display this option if there are two value or dummy inputs
-          // next to each other.
-          var inlineOption = {enabled: true};
-          var isInline = this.getInputsInline();
-          inlineOption.text = isInline ?
-              Blockly.Msg.EXTERNAL_INPUTS : Blockly.Msg.INLINE_INPUTS;
-          inlineOption.callback = function() {
-            block.setInputsInline(!isInline);
-          };
-          menuOptions.push(inlineOption);
-          break;
-        }
-      }
-    }
+    // // Option to make block inline.
+    // if (!this.collapsed_) {
+    //   for (var i = 1; i < this.inputList.length; i++) {
+    //     if (this.inputList[i - 1].type != Blockly.NEXT_STATEMENT &&
+    //         this.inputList[i].type != Blockly.NEXT_STATEMENT) {
+    //       // Only display this option if there are two value or dummy inputs
+    //       // next to each other.
+    //       var inlineOption = {enabled: true};
+    //       var isInline = this.getInputsInline();
+    //       inlineOption.text = isInline ?
+    //           Blockly.Msg.EXTERNAL_INPUTS : Blockly.Msg.INLINE_INPUTS;
+    //       inlineOption.callback = function() {
+    //         block.setInputsInline(!isInline);
+    //       };
+    //       menuOptions.push(inlineOption);
+    //       break;
+    //     }
+    //   }
+    // }
 
-    if (this.workspace.options.collapse) {
-      // Option to collapse/expand block.
-      if (this.collapsed_) {
-        var expandOption = {enabled: true};
-        expandOption.text = Blockly.Msg.EXPAND_BLOCK;
-        expandOption.callback = function() {
-          block.setCollapsed(false);
-        };
-        menuOptions.push(expandOption);
-      } else {
-        var collapseOption = {enabled: true};
-        collapseOption.text = Blockly.Msg.COLLAPSE_BLOCK;
-        collapseOption.callback = function() {
-          block.setCollapsed(true);
-        };
-        menuOptions.push(collapseOption);
-      }
-    }
+    // if (this.workspace.options.collapse) {
+    //   // Option to collapse/expand block.
+    //   if (this.collapsed_) {
+    //     var expandOption = {enabled: true};
+    //     expandOption.text = Blockly.Msg.EXPAND_BLOCK;
+    //     expandOption.callback = function() {
+    //       block.setCollapsed(false);
+    //     };
+    //     menuOptions.push(expandOption);
+    //   } else {
+    //     var collapseOption = {enabled: true};
+    //     collapseOption.text = Blockly.Msg.COLLAPSE_BLOCK;
+    //     collapseOption.callback = function() {
+    //       block.setCollapsed(true);
+    //     };
+    //     menuOptions.push(collapseOption);
+    //   }
+    // }
 
     if (this.workspace.options.disable) {
       // Option to disable/enable block.

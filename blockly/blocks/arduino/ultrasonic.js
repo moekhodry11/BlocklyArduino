@@ -3,7 +3,7 @@ goog.provide("Blockly.Blocks.ultrasonic");
 goog.require("Blockly.Blocks");
 goog.require("Blockly.Types");
 
-Blockly.Blocks.ultrasonic.HUE = 150;
+Blockly.Blocks.ultrasonic.HUE = 180;
 Blockly.Blocks["ultrasonic_setup"] = {
   init: function () {
     this.setHelpUrl("https://www.arduino.cc/reference/en/libraries/ultrasonic/");
@@ -78,7 +78,7 @@ Blockly.Blocks["ultrasonic_read"] = {
         new Blockly.FieldDropdown(Blockly.Arduino.Boards.selected.digitalPins),
         "ECHO"
       );
-      this.setCommentText("Read the Ultrasonic Sensor");
+      // this.setCommentText("Read the Ultrasonic Sensor");
     this.setOutput(true, "Number");
     this.setColour(Blockly.Blocks.ultrasonic.HUE);
     this.setTooltip("Read the Ultrasonic Sensor");
