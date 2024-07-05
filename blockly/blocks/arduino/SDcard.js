@@ -74,7 +74,7 @@ Blockly.Blocks['sdcard_open'] = {
     this.appendDummyInput()
         .appendField("Mode")
         .appendField(new Blockly.FieldDropdown([["READ", "READ"], ["WRITE", "WRITE"]]), "MODE");
-        this.setCommentText("sdcard_open");
+        // this.setCommentText("sdcard_open");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(Blockly.Blocks.sdcard.HUE);
@@ -123,7 +123,7 @@ Blockly.Blocks['sdcard_write'] = {
     this.appendValueInput("DATA")
         .setCheck(Blockly.Types.TEXT.checkList)
         .appendField("Write to file");
-        this.setCommentText("sdcard_write");
+        // this.setCommentText("sdcard_write");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(Blockly.Blocks.sdcard.HUE);
@@ -169,7 +169,7 @@ Blockly.Blocks['sdcard_read'] = {
   init: function() {
     this.appendDummyInput()
         .appendField("Read from file");
-        this.setCommentText("sdcard_read");
+        // this.setCommentText("sdcard_read");
     this.setOutput(true, Blockly.Types.TEXT.output);
     this.setColour(Blockly.Blocks.sdcard.HUE);
     this.setTooltip('Read from a file on the SD Card');
@@ -217,7 +217,7 @@ Blockly.Blocks['sdcard_close'] = {
   init: function() {
     this.appendDummyInput()
         .appendField("Close file");
-        this.setCommentText("sdcard_close");
+        // this.setCommentText("sdcard_close");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(Blockly.Blocks.sdcard.HUE);

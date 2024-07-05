@@ -746,56 +746,56 @@ Blockly.WorkspaceSvg.prototype.showContextMenu_ = function(e) {
     menuOptions.push(cleanOption);
   }
 
-  // Add a little animation to collapsing and expanding.
-  var DELAY = 10;
-  if (this.options.collapse) {
-    var hasCollapsedBlocks = false;
-    var hasExpandedBlocks = false;
-    for (var i = 0; i < topBlocks.length; i++) {
-      var block = topBlocks[i];
-      while (block) {
-        if (block.isCollapsed()) {
-          hasCollapsedBlocks = true;
-        } else {
-          hasExpandedBlocks = true;
-        }
-        block = block.getNextBlock();
-      }
-    }
+  // // Add a little animation to collapsing and expanding.
+  // var DELAY = 10;
+  // if (this.options.collapse) {
+  //   var hasCollapsedBlocks = false;
+  //   var hasExpandedBlocks = false;
+  //   for (var i = 0; i < topBlocks.length; i++) {
+  //     var block = topBlocks[i];
+  //     while (block) {
+  //       if (block.isCollapsed()) {
+  //         hasCollapsedBlocks = true;
+  //       } else {
+  //         hasExpandedBlocks = true;
+  //       }
+  //       block = block.getNextBlock();
+  //     }
+  //   }
 
-    /**
-     * Option to collapse or expand top blocks.
-     * @param {boolean} shouldCollapse Whether a block should collapse.
-     * @private
-     */
-    var toggleOption = function(shouldCollapse) {
-      var ms = 0;
-      for (var i = 0; i < topBlocks.length; i++) {
-        var block = topBlocks[i];
-        while (block) {
-          setTimeout(block.setCollapsed.bind(block, shouldCollapse), ms);
-          block = block.getNextBlock();
-          ms += DELAY;
-        }
-      }
-    };
+  //   /**
+  //    * Option to collapse or expand top blocks.
+  //    * @param {boolean} shouldCollapse Whether a block should collapse.
+  //    * @private
+  //    */
+  //   var toggleOption = function(shouldCollapse) {
+  //     var ms = 0;
+  //     for (var i = 0; i < topBlocks.length; i++) {
+  //       var block = topBlocks[i];
+  //       while (block) {
+  //         setTimeout(block.setCollapsed.bind(block, shouldCollapse), ms);
+  //         block = block.getNextBlock();
+  //         ms += DELAY;
+  //       }
+  //     }
+  //   };
 
-    // Option to collapse top blocks.
-    var collapseOption = {enabled: hasExpandedBlocks};
-    collapseOption.text = Blockly.Msg.COLLAPSE_ALL;
-    collapseOption.callback = function() {
-      toggleOption(true);
-    };
-    menuOptions.push(collapseOption);
+  //   // Option to collapse top blocks.
+  //   var collapseOption = {enabled: hasExpandedBlocks};
+  //   collapseOption.text = Blockly.Msg.COLLAPSE_ALL;
+  //   collapseOption.callback = function() {
+  //     toggleOption(true);
+  //   };
+  //   menuOptions.push(collapseOption);
 
-    // Option to expand top blocks.
-    var expandOption = {enabled: hasCollapsedBlocks};
-    expandOption.text = Blockly.Msg.EXPAND_ALL;
-    expandOption.callback = function() {
-      toggleOption(false);
-    };
-    menuOptions.push(expandOption);
-  }
+  //   // Option to expand top blocks.
+  //   var expandOption = {enabled: hasCollapsedBlocks};
+  //   expandOption.text = Blockly.Msg.EXPAND_ALL;
+  //   expandOption.callback = function() {
+  //     toggleOption(false);
+  //   };
+  //   menuOptions.push(expandOption);
+  // }
 
   // Option to delete all blocks.
   // Count the number of blocks that are deletable.

@@ -18,7 +18,7 @@ goog.require("Blockly.Blocks");
 goog.require("Blockly.Types");
 
 /** Common HSV hue for all blocks in this category. */
-Blockly.Blocks.lcd.HUE = 50;
+Blockly.Blocks.lcd.HUE = 400;
 
 Blockly.Blocks["lcd_begin"] = {
   /**
@@ -217,7 +217,7 @@ Blockly.Blocks["lcd_print"] = {
         new Blockly.FieldDropdown([["1"], ["2"], ["3"], ["4"]]),
         "ID"
       );
-    this.setCommentText("lcd_print");
+  //  this.setCommentText("lcd_print");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setTooltip(Blockly.Msg.ARD_LCD_PRINT_TIP);
@@ -293,7 +293,7 @@ Blockly.Blocks["lcd_set_cursor"] = {
         new Blockly.FieldDropdown([["1"], ["2"], ["3"], ["4"]]),
         "ID"
       );
-    this.setCommentText("lcd_set_cursor");
+   // this.setCommentText("lcd_set_cursor");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setTooltip(Blockly.Msg.ARD_LCD_SET_CURSOR_TIP);
@@ -367,7 +367,7 @@ Blockly.Blocks["lcd_clear"] = {
         ]),
         "ID"
       );
-    this.setCommentText("lcd_clear");
+   // this.setCommentText("lcd_clear");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setTooltip(Blockly.Msg.ARD_LCD_CLEAR_TIP);

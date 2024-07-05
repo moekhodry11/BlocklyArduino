@@ -1,9 +1,9 @@
 "use strict";
-goog.provide("Blockly.Blocks.tmp36.js");
+goog.provide("Blockly.Blocks.tmp36");
 goog.require("Blockly.Blocks");
 goog.require("Blockly.Types");
 
-Blockly.Blocks.tmp36.HUE = 230;
+Blockly.Blocks.tmp36.HUE = 180;
 
 
 Blockly.Blocks["tmp36_read"] = {
