@@ -9,7 +9,7 @@ This is all packaged in a self contained executable desktop application for Wind
 
 
 ## Features
-* Generates Arduino code with visual drag-and-drop blocks
+* Generates Arduino code with visual drag-and-drop blocks 
 * Uploads the code to an Arduino Board
 * Useful "code block warnings"
 * Compatible with a wide range of official Arduino Boards
